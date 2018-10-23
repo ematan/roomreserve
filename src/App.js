@@ -15,6 +15,8 @@ import AccountPage from './components/Account';
 
 import * as routes from './constants/routes';
 import { firebase } from './firebase';
+import Frontpage from "./Frontpage";
+
 
 class App extends Component {
   constructor(props) {
@@ -70,22 +72,7 @@ export default App;
 /*class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Content comes here.
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <Frontpage />
     );
   }
 }

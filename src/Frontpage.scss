@@ -1,0 +1,32 @@
+@import "variables";
+
+.frontpage {
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  background-image: url("./img/bg.jpg");
+  background-repeat: no-repeat;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.logo {
+  height: 20%;
+  margin-top: 10%;
+}
+
+.link {
+  flex-basis: 100%;
+}
+
+.link a {
+  background-color: $blue-light;
+  padding: 20px 30px;
+  border-radius: 10px;
+  color: $white;
+  text-decoration: none;
+  border: 1px solid $white;
+  font-weight: $bold;
+}
