@@ -1,0 +1,33 @@
+@import "../variables";
+
+.navContainer {
+  background-color: $white;
+  width: 100%;
+  position: absolute;
+}
+
+link {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+ul {
+  margin: 0 !important;
+  padding: 0 !important;
+  list-style: none;
+}
+
+.home-btn {
+  float: left;
+}
+
+.signin-btn {
+  float: right;
+}
+
+.logo-icon, .login-icon {
+  height: 20px;
+  display: inline-block;
+  margin: 10px;
+  margin-bottom: 5px;
+}

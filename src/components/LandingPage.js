@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import "./LandingPage.scss";
-import image from "../img/logo.png";
+import logo from "../img/logo.png";
 
 class LandingPage extends Component {
   constructor(props) {
@@ -23,7 +23,7 @@ class LandingPage extends Component {
   render() {
     return (
       <div className="frontpage" style={{height: this.state.height}}>
-        <img className="logo" src={image} alt="logo"/>
+        <img className="logo" src={logo} alt="logo"/>
         <div className="link">
           <a href="/">See the buildings</a>
         </div>

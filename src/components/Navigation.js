@@ -1,5 +1,8 @@
 import React from 'react'
 import {Link} from 'react-router-dom';
+import "./Navigation.scss";
+import logo from "../img/logo.png";
+import loginIcon from "../img/login.png";
 
 import * as routes from '../constants/routes';
 import SignOutButton from './SignOut';
@@ -26,13 +29,13 @@ const NavigationLoggedIn = () =>
 </div>
 
 const NavigationLoggedOut = () =>
-<div>
+<div className="navContainer">
   <ul>
-    <li>
-      <Link to={routes.SIGN_IN}>Sign In</Link>
+    <li className="home-btn">
+      <Link to={routes.LANDING}><img className="logo-icon" src={logo} alt="logo"/></Link>
     </li>
-    <li>
-      <Link to={routes.LANDING}>Landing</Link>
+    <li className="signin-btn">
+      <Link to={routes.SIGN_IN}><img className="login-icon" src={loginIcon} alt="login icon"/></Link>
     </li>
   </ul>
 </div>
