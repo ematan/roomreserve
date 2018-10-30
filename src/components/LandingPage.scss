@@ -1,10 +1,9 @@
-@import "variables";
+@import "../variables";
 
 .frontpage {
   background-size: cover;
   width: 100vw;
-  height: 100vh;
-  background-image: url("./img/bg.jpg");
+  background-image: url("../img/bg.jpg");
   background-repeat: no-repeat;
   text-align: center;
   display: flex;
@@ -13,7 +12,7 @@
 }
 
 .logo {
-  height: 20%;
+  height: 200px;
   margin-top: 10%;
 }
 
@@ -29,4 +28,11 @@
   text-decoration: none;
   border: 1px solid $white;
   font-weight: $bold;
+}
+
+@media only screen and (max-width: 600px) {
+    .logo {
+      height: 100px;
+      margin-top: 20%;
+    }
 }
