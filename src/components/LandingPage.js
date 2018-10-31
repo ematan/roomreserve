@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import "./LandingPage.scss";
 import logo from "../img/logo.png";
+import Page from "./Page";
 
 class LandingPage extends Component {
   constructor(props) {
@@ -16,18 +17,20 @@ class LandingPage extends Component {
   calcNavHeight() {
     const nav = document.getElementById("navbar");
     const winHeight = document.documentElement.clientHeight;
-    // height of image
-    if(nav) this.setState({ height: winHeight - nav.offsetHeight })
+    // height of image - navheight
+    if(nav) this.setState({ height: winHeight - nav.offsetHeight - 40 })
   }
 
   render() {
     return (
-      <div className="frontpage" style={{height: this.state.height}}>
-        <img className="logo" src={logo} alt="logo"/>
-        <div className="link">
-          <a href="/">See the buildings</a>
+      <Page>
+        <div className="frontpage" style={{height: this.state.height}}>
+          <img className="logo" src={logo} alt="logo"/>
+          <div className="link">
+            <a href="/">See the buildings</a>
+          </div>
         </div>
-      </div>
+      </Page>
   )}
 }
 

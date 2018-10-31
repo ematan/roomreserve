@@ -5,13 +5,15 @@ import { SignUpLink } from './SignUp';
 import { auth } from '../firebase';
 import * as routes from '../constants/routes';
 
+import Page from "./Page";
+
 
 const SignInPage = ({ history }) =>
-  <div>
+  <Page>
     <h1>SignIn</h1>
     <SignInForm history={history} />
     <SignUpLink />
-  </div>
+  </Page>
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
