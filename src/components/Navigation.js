@@ -24,6 +24,9 @@ const NavigationLoggedIn = () =>
     <li>
       <Link to={routes.ACCOUNT}>Account</Link>
     </li>
+    <li>
+      <Link to={routes.BUILDINGS}>Buildings</Link>
+    </li>
     <li><SignOutButton/></li>
   </ul>
 </div>
