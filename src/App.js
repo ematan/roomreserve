@@ -43,13 +43,3 @@ class App extends Component {
 }
 
 export default App;
-
-//////
-/*class App extends Component {
-  render() {
-    return (
-      <Frontpage />
-    );
-  }
-}
-*/

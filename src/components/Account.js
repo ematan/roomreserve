@@ -1,8 +1,9 @@
 import React from 'react';
+import Page from "./Page"
 
 const Account = () =>
-  <div>
+  <Page>
     <h1>Account</h1>
-  </div>
+  </Page>
 
 export default Account;

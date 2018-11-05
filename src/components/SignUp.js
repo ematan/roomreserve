@@ -1,16 +1,17 @@
 import React, {Component} from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { auth } from '../firebase';
+import Page from "./Page";
 
 import * as routes from '../constants/routes';
+import "./SignUp.scss";
 
 
 const SignUpPage = ({ history }) =>
-  <div>
+  <Page>
     <h1>SignUp</h1>
     <SignUpForm history={history} />
-
-  </div>
+  </Page>
 
 const INITIAL_STATE = {
   username: '',
@@ -20,7 +21,7 @@ const INITIAL_STATE = {
   error: null,
 };
 
- 
+
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -30,7 +31,7 @@ class SignUpForm extends Component {
 	constructor(props) {
 		super(props);
 		this.state = { ...INITIAL_STATE };
-    
+
 	}
 
 	onSubmit = (event) => {
@@ -47,7 +48,7 @@ class SignUpForm extends Component {
     auth.doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
         this.setState({ ...INITIAL_STATE });
-        history.push(routes.HOME);
+        history.push(routes.LANDING);
       })
       .catch(error => {
         this.setState(byPropKey('error', error));
@@ -98,7 +99,7 @@ class SignUpForm extends Component {
           type="password"
           placeholder="Confirm Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <button className="btn" disabled={isInvalid} type="submit">
           Sign Up
         </button>
 
