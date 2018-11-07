@@ -5,13 +5,19 @@ import { SignUpLink } from './SignUp';
 import { auth } from '../firebase';
 import * as routes from '../constants/routes';
 
+import Page from "./Page";
+
+import "./SignIn.scss";
+
 
 const SignInPage = ({ history }) =>
-  <div>
-    <h1>SignIn</h1>
-    <SignInForm history={history} />
-    <SignUpLink />
-  </div>
+  <Page className="page">
+    <div className="signInCont">
+      <h1>SignIn</h1>
+      <SignInForm history={history} />
+      <SignUpLink />
+    </div>
+  </Page>
 
 const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value,
@@ -43,7 +49,7 @@ class SignInForm extends Component {
     auth.doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        history.push(routes.HOME);
+        history.push(routes.LANDING);
       })
       .catch(error => {
         this.setState(byPropKey('error', error));
@@ -64,7 +70,7 @@ class SignInForm extends Component {
       email === '';
 
     return (
-      <form onSubmit={this.onSubmit}>
+      <form onSubmit={this.onSubmit} className="signInForm">
         <input
           value={email}
           onChange={event => this.setState(byPropKey('email', event.target.value))}
@@ -77,7 +83,7 @@ class SignInForm extends Component {
           type="password"
           placeholder="Password"
         />
-        <button disabled={isInvalid} type="submit">
+        <button className="btn" disabled={isInvalid} type="submit">
           Sign In
         </button>
 

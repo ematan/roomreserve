@@ -17,12 +17,13 @@ ul {
   list-style: none;
 }
 
-.home-btn {
+.fl-left {
   float: left;
 }
 
-.signin-btn {
+.fl-right {
   float: right;
+  margin-right: 1rem;
 }
 
 .logo-icon, .login-icon {

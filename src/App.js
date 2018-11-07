@@ -7,7 +7,6 @@ import LandingPage from './components/LandingPage';
 import SignUpPage from './components/SignUp';
 import SignInPage from './components/SignIn';
 import PasswordForgetPage from './components/PasswordForget';
-import HomePage from './components/Home';
 import AccountPage from './components/Account';
 import BuildingList from './components/Buildings';
 
@@ -38,7 +37,6 @@ class App extends Component {
         <Route exact path={routes.SIGN_UP} component={SignUpPage}/>
         <Route exact path={routes.SIGN_IN} component={SignInPage}/>
         <Route exact path={routes.PASSWORD_FORGET} component={PasswordForgetPage}/>
-        <Route exact path={routes.HOME} component={HomePage}/>
         <Route exact path={routes.ACCOUNT} component={AccountPage}/>
         <Route exact path={routes.BUILDINGS} component={BuildingList}/>
       </div>
@@ -47,13 +45,3 @@ class App extends Component {
 }
 
 export default App;
-
-//////
-/*class App extends Component {
-  render() {
-    return (
-      <Frontpage />
-    );
-  }
-}
-*/
