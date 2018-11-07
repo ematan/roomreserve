@@ -23,6 +23,9 @@ const NavigationLoggedIn = () =>
     <li className="fl-right">
       <Link to={routes.ACCOUNT}><img className="logo-icon" src={accountIcon} alt="account icon"/></Link>
     </li>
+    <li>
+      <Link to={routes.BUILDINGS}>Buildings</Link>
+    </li>
   </ul>
 </div>
 
