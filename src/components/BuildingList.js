@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { db } from "../firebase";
+import Page from "./Page";
 
 class BuildingList extends Component {
   constructor(props) {
@@ -19,22 +20,22 @@ class BuildingList extends Component {
     const { buildings } = this.state;
 
     return (
-      <div>
+      <Page>
         <h1>Buildings</h1>
         {!!buildings && <BList buildings={buildings} />}
-      </div>
+      </Page>
     );
   }
 }
 
 const BList = ({ buildings }) => (
-  <div>
+  <ul>
     {Object.keys(buildings).map(key => (
-      <div key={key}>
+      <li key={key}>
         {buildings[key].name}, jonka osoite on: {buildings[key].address}
-      </div>
+      </li>
     ))}
-  </div>
+  </ul>
 );
 
 export default BuildingList;

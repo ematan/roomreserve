@@ -4,6 +4,7 @@ import "./Navigation.scss";
 import logo from "../img/logo.png";
 import loginIcon from "../img/login.png";
 import accountIcon from "../img/account.png";
+import buildingIcon from "../img/building.png";
 
 import * as routes from "../constants/routes";
 import SignOutButton from "./SignOut";
@@ -30,8 +31,10 @@ const NavigationLoggedIn = () => (
           <img className="logo-icon" src={accountIcon} alt="account icon" />
         </Link>
       </li>
-      <li>
-        <Link to={routes.BUILDINGS}>Buildings</Link>
+      <li className="fl-right">
+        <Link to={routes.BUILDINGS}>
+          <img className="logo-icon" src={buildingIcon} alt="building icon" />
+        </Link>
       </li>
     </ul>
   </div>

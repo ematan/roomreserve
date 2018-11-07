@@ -8,7 +8,7 @@ import SignUpPage from "./components/SignUp";
 import SignInPage from "./components/SignIn";
 import PasswordForgetPage from "./components/PasswordForget";
 import AccountPage from "./components/Account";
-import BuildingList from "./components/Buildings";
+import BuildingList from "./components/BuildingList";
 
 import * as routes from "./constants/routes";
 import { firebase } from "./firebase";
