@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import "./LandingPage.scss";
 import logo from "../img/logo.png";
 
@@ -17,18 +17,19 @@ class LandingPage extends Component {
     const nav = document.getElementById("navbar");
     const winHeight = document.documentElement.clientHeight;
     // height of image
-    if(nav) this.setState({ height: winHeight - nav.offsetHeight })
+    if (nav) this.setState({ height: winHeight - nav.offsetHeight });
   }
 
   render() {
     return (
-      <div className="frontpage" style={{height: this.state.height}}>
-        <img className="logo" src={logo} alt="logo"/>
+      <div className="frontpage" style={{ height: this.state.height }}>
+        <img className="logo" src={logo} alt="logo" />
         <div className="link">
-          <a href="/">See the buildings</a>
+          <a href="/buildings">See the buildings</a>
         </div>
       </div>
-  )}
+    );
+  }
 }
 
 export default LandingPage;
