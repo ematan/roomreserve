@@ -17,20 +17,21 @@ class LandingPage extends Component {
   calcNavHeight() {
     const nav = document.getElementById("navbar");
     const winHeight = document.documentElement.clientHeight;
-    if(nav) this.setState({ height: winHeight - nav.offsetHeight - 40 })
+    if (nav) this.setState({ height: winHeight - nav.offsetHeight - 40 });
   }
 
   render() {
     return (
-            <Page>
-        <div className="frontpage" style={{height: this.state.height}}>
-          <img className="logo" src={logo} alt="logo"/>
+      <Page>
+        <div className="frontpage" style={{ height: this.state.height }}>
+          <img className="logo" src={logo} alt="logo" />
           <div className="link">
             <a href="/buildings">See the buildings</a>
           </div>
         </div>
       </Page>
-  )}
+    );
+  }
 }
 
 export default LandingPage;
