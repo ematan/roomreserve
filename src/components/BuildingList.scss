@@ -1,0 +1,40 @@
+@import "../variables";
+
+h1 {
+  margin: 60px;
+}
+
+.page {
+  background-size: cover;
+  width: 100vw;
+  background-image: url("../img/bg.jpg");
+  background-repeat: no-repeat;
+}
+
+.list {
+  background-color: white;
+}
+
+.list a {
+  text-align: center;
+  margin: 5px 0 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(98, 146, 158, 0.1) 30%,
+    rgba(98, 146, 158, 0.3) 90%
+  );
+}
+
+.avtr {
+  height: 50px !important;
+  width: 50px !important;
+}
+
+.liText {
+  font-size: 1.2rem !important;
+}
+
+.liTextS {
+  font-size: 1rem !important;
+  padding-right: 20px !important;
+}

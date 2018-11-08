@@ -1,6 +1,21 @@
 import React, { Component } from "react";
 import { db } from "../firebase";
 import Page from "./Page";
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
+import Avatar from "@material-ui/core/Avatar";
+import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
+import buildingIcon from "../img/building.png";
+import "./BuildingList.scss";
+
+const theme = createMuiTheme({
+  typography: {
+    // Making the List accept our font
+    fontFamily: "Open Sans"
+  }
+});
 
 class BuildingList extends Component {
   constructor(props) {
@@ -20,22 +35,33 @@ class BuildingList extends Component {
     const { buildings } = this.state;
 
     return (
-      <Page>
+      <Page className="page">
         <h1>Buildings</h1>
-        {!!buildings && <BList buildings={buildings} />}
+        <MuiThemeProvider theme={theme}>
+          <List dense className="list">
+            {Object.keys(buildings || {}).map(key => (
+              <ListItem
+                key={key}
+                button
+                component="a"
+                href={"buildings/" + key}
+              >
+                <Avatar alt="building" src={buildingIcon} className="avtr" />
+                <ListItemText
+                  className="liText"
+                  primary={buildings[key].name}
+                  secondary={buildings[key].address}
+                />
+                <ListItemSecondaryAction>
+                  <ListItemText className="liTextS" primary="#" />
+                </ListItemSecondaryAction>
+              </ListItem>
+            ))}
+          </List>
+        </MuiThemeProvider>
       </Page>
     );
   }
 }
-
-const BList = ({ buildings }) => (
-  <ul>
-    {Object.keys(buildings).map(key => (
-      <li key={key}>
-        {buildings[key].name}, jonka osoite on: {buildings[key].address}
-      </li>
-    ))}
-  </ul>
-);
 
 export default BuildingList;

@@ -1,7 +1,7 @@
 @import "../variables";
 
 .navContainer {
-  background-color: $white;
+  background-color: rgba(255, 255, 255, 0.8);
   width: 100%;
   position: absolute;
 }
@@ -26,7 +26,8 @@ ul {
   margin-right: 1rem;
 }
 
-.logo-icon, .login-icon {
+.logo-icon,
+.login-icon {
   height: 20px;
   display: inline-block;
   margin: 10px;
