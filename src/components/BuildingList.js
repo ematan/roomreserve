@@ -29,10 +29,34 @@ class BuildingList extends Component {
     db.onceGetBuildings().then(snapshot =>
       this.setState({ buildings: snapshot.val() })
     );
+    db.onceGetRooms().then(snapshot =>
+      this.setState({ rooms: snapshot.val() })
+    );
   }
 
   render() {
-    const { buildings } = this.state;
+    const { buildings, rooms } = this.state;
+    if (buildings && rooms) {
+      // array with buildings and rooms that are in the buildings
+      let buildingsWithRooms = buildings;
+      Object.values(rooms).map(i => {
+        console.log(JSON.stringify(i, null, 2));
+        const building = i.building;
+        if (!building || !buildingsWithRooms[building]) {
+          console.log("missing building");
+          console.log("building: ", building);
+          console.log("keys: ", Object.keys(buildingsWithRooms));
+          return buildingsWithRooms;
+        }
+        if (buildingsWithRooms[i.building].rooms) {
+          buildingsWithRooms[i.building].rooms.push(i);
+        } else {
+          buildingsWithRooms[i.building].rooms = [i];
+        }
+        return buildingsWithRooms;
+      });
+      console.log(buildingsWithRooms);
+    }
 
     return (
       <Page className="page">
@@ -53,7 +77,12 @@ class BuildingList extends Component {
                   secondary={buildings[key].address}
                 />
                 <ListItemSecondaryAction>
-                  <ListItemText className="liTextS" primary="#" />
+                  <ListItemText
+                    className="liTextS"
+                    primary={
+                      buildings[key].rooms ? buildings[key].rooms.length : 0
+                    }
+                  />
                 </ListItemSecondaryAction>
               </ListItem>
             ))}
