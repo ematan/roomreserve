@@ -1,9 +1,12 @@
 import React from "react";
 import Page from "./Page";
 
-const Account = () => (
+const Account = ({authUser}) => (
   <Page>
-    <h1>Account</h1>
+  	{authUser 
+  		? <h1>Account</h1> 
+  		: <h1>No Access</h1>
+  	}
   </Page>
 );
 
