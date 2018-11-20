@@ -9,29 +9,31 @@ import SignInPage from "./components/SignIn";
 import PasswordForgetPage from "./components/PasswordForget";
 import AccountPage from "./components/Account";
 import BuildingList from "./components/BuildingList";
+import RoomList from "./components/RoomList";
 
 import * as routes from "./constants/routes";
 //import { firebase } from "./firebase";
 
-import withAuthentication from './components/Session/withAuth';
+import withAuthentication from "./components/Session/withAuth";
 
-const App = () => 
-      <Router>
-        <div>
-          <Navigation />
-          
-          <Route exact path={routes.LANDING} component={LandingPage} />
-          <Route exact path={routes.SIGN_UP} component={SignUpPage} />
-          <Route exact path={routes.SIGN_IN} component={SignInPage} />
-          <Route
-            exact
-            path={routes.PASSWORD_FORGET}
-            component={PasswordForgetPage}
-          />
-          <Route exact path={routes.ACCOUNT} component={AccountPage} />
-          <Route exact path={routes.BUILDINGS} component={BuildingList} />
-        </div>
-      </Router>
+const App = () => (
+  <Router>
+    <div>
+      <Navigation />
 
+      <Route exact path={routes.LANDING} component={LandingPage} />
+      <Route exact path={routes.SIGN_UP} component={SignUpPage} />
+      <Route exact path={routes.SIGN_IN} component={SignInPage} />
+      <Route
+        exact
+        path={routes.PASSWORD_FORGET}
+        component={PasswordForgetPage}
+      />
+      <Route exact path={routes.ACCOUNT} component={AccountPage} />
+      <Route exact path={routes.BUILDINGS} component={BuildingList} />
+      <Route exact path={routes.BUILDING_ROOMS} component={RoomList} />
+    </div>
+  </Router>
+);
 
 export default withAuthentication(App);

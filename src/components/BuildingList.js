@@ -9,6 +9,7 @@ import Avatar from "@material-ui/core/Avatar";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import buildingIcon from "../img/building.png";
 import "./BuildingList.scss";
+import { Link } from "react-router-dom";
 
 const theme = createMuiTheme({
   typography: {
@@ -37,25 +38,17 @@ class BuildingList extends Component {
   render() {
     const { buildings, rooms } = this.state;
     if (buildings && rooms) {
-      // array with buildings and rooms that are in the buildings
-      let buildingsWithRooms = buildings;
-      Object.values(rooms).map(i => {
-        console.log(JSON.stringify(i, null, 2));
+      // adding list of rooms to each building
+      Object.values(rooms).forEach(i => {
         const building = i.building;
-        if (!building || !buildingsWithRooms[building]) {
-          console.log("missing building");
-          console.log("building: ", building);
-          console.log("keys: ", Object.keys(buildingsWithRooms));
-          return buildingsWithRooms;
+        if (building && buildings[building]) {
+          if (buildings[i.building].rooms) {
+            buildings[i.building].rooms.push(i);
+          } else {
+            buildings[i.building].rooms = [i];
+          }
         }
-        if (buildingsWithRooms[i.building].rooms) {
-          buildingsWithRooms[i.building].rooms.push(i);
-        } else {
-          buildingsWithRooms[i.building].rooms = [i];
-        }
-        return buildingsWithRooms;
       });
-      console.log(buildingsWithRooms);
     }
 
     return (
@@ -67,8 +60,15 @@ class BuildingList extends Component {
               <ListItem
                 key={key}
                 button
-                component="a"
-                href={"buildings/" + key}
+                component={props => (
+                  <Link
+                    {...props}
+                    to={{
+                      pathname: "/buildings/" + key,
+                      state: buildings[key].rooms
+                    }}
+                  />
+                )}
               >
                 <Avatar alt="building" src={buildingIcon} className="avtr" />
                 <ListItemText
