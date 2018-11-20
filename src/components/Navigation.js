@@ -12,12 +12,14 @@ import SignOutButton from "./SignOut";
 import AuthUserContext from './Session/AuthUserContext';
 
 const Navigation = () =>
-  <AuthUserContext.Consumer>
+  <div id="navbar">
+    <AuthUserContext.Consumer>
       {authUser => authUser 
-        ? <div id="navbar"><NavigationLoggedIn /></div>
-        : <div id="navbar"><NavigationLoggedOut /></div>
+        ? <NavigationLoggedIn />
+        : <NavigationLoggedOut />
       }
-  </AuthUserContext.Consumer>
+    </AuthUserContext.Consumer>
+  </div>
 
 
 
