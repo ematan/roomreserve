@@ -9,11 +9,17 @@ import buildingIcon from "../img/building.png";
 import * as routes from "../constants/routes";
 import SignOutButton from "./SignOut";
 
-const Navigation = ({ authUser }) => (
-  <div id="navbar">
-    {authUser ? <NavigationLoggedIn /> : <NavigationLoggedOut />}
-  </div>
-);
+import AuthUserContext from './Session/AuthUserContext';
+
+const Navigation = () =>
+  <AuthUserContext.Consumer>
+      {authUser => authUser 
+        ? <div id="navbar"><NavigationLoggedIn /></div>
+        : <div id="navbar"><NavigationLoggedOut /></div>
+      }
+  </AuthUserContext.Consumer>
+
+
 
 const NavigationLoggedIn = () => (
   <div className="navContainer">

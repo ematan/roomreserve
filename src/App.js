@@ -11,33 +11,15 @@ import AccountPage from "./components/Account";
 import BuildingList from "./components/BuildingList";
 
 import * as routes from "./constants/routes";
-import { firebase } from "./firebase";
+//import { firebase } from "./firebase";
 
-class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      authUser: null
-    };
-  }
+import withAuthentication from './components/Session/withAuth';
 
-  componentDidMount() {
-    this.listener = firebase.auth.onAuthStateChanged(authUser => {
-      authUser
-        ? this.setState({ authUser })
-        : this.setState({ authUser: null });
-    });
-  }
-
-  componentWillUnmount() {
-    this.listener();
-  }
-
-  render() {
-    return (
+const App = () => 
       <Router>
         <div>
-          <Navigation authUser={this.state.authUser} />
+          <Navigation />
+          <hr />
           <Route exact path={routes.LANDING} component={LandingPage} />
           <Route exact path={routes.SIGN_UP} component={SignUpPage} />
           <Route exact path={routes.SIGN_IN} component={SignInPage} />
@@ -50,8 +32,6 @@ class App extends Component {
           <Route exact path={routes.BUILDINGS} component={BuildingList} />
         </div>
       </Router>
-    );
-  }
-}
 
-export default App;
+
+export default withAuthentication(App);
