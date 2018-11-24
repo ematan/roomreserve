@@ -1,6 +1,6 @@
 @import "../variables";
 
-h1 {
+.h1 {
   margin: 60px 60px 0 60px;
 }
 
@@ -12,6 +12,7 @@ h1 {
 .page {
   background-size: cover;
   width: 100vw;
+  height: calc(100vh - 40px);
   background-image: url("../img/bg.jpg");
   background-repeat: no-repeat;
 }
@@ -20,14 +21,17 @@ h1 {
   background-color: white;
 }
 
-.list a {
-  text-align: center !important;
+.list li {
   margin: 5px 0 !important;
   background: linear-gradient(
     135deg,
     rgba(98, 146, 158, 0.1) 30%,
     rgba(98, 146, 158, 0.3) 90%
   );
+}
+
+.list li div {
+  text-align: center;
 }
 
 .chair {

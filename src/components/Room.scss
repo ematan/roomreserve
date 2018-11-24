@@ -1,0 +1,73 @@
+@import "../variables";
+
+h1 {
+  margin: 40px;
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 10px;
+}
+
+.header {
+  height: 100px;
+}
+
+.room {
+  width: 100vw;
+  height: calc(100vh - 40px);
+  background: $beige url("../img/room.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  padding-top: 40px;
+}
+
+.roomInfo {
+  width: 50%;
+  margin: 0 auto;
+  background-color: rgba(255, 255, 255, 0.8);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.line {
+  display: flex;
+  justify-content: space-between;
+  margin: 20px;
+}
+
+.line > * {
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.link {
+  text-align: center;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.roomInfo p {
+  display: inline-block;
+  font-size: 22px;
+}
+
+.largeIcon {
+  height: 50px;
+  width: 50px;
+  display: inline-block;
+  padding-top: 10px;
+}
+
+@media only screen and (max-width: 600px) {
+  .roomInfo {
+    width: 90%;
+  }
+
+  .line {
+    margin: 10px;
+  }
+
+  h1 {
+    font-size: 2em !important;
+  }
+}

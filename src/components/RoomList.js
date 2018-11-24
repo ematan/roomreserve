@@ -3,13 +3,12 @@ import Page from "./Page";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Avatar from "@material-ui/core/Avatar";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import roomIcon from "../img/room.png";
-import chairIcon from "../img/chair.svg";
 import { db } from "../firebase";
+import { Link } from "react-router-dom";
 
 import "./RoomList.scss";
 
@@ -38,19 +37,35 @@ class RoomList extends Component {
     const { location, match } = this.props;
     return (
       <Page className="page">
-        <h1>
+        <h1 className="h1">
           {this.state.buildings &&
-            this.state.buildings[match.params.roomid].name}
+            this.state.buildings[match.params.buildingid].name}
         </h1>
         <p className="address">
           {this.state.buildings &&
-            this.state.buildings[match.params.roomid].address}
+            this.state.buildings[match.params.buildingid].address}
         </p>
         <MuiThemeProvider theme={theme}>
           <List dense className="list">
             {location.state &&
               location.state.map(key => (
-                <ListItem key={key.name + key.building} button>
+                <ListItem
+                  key={key.name + key.building}
+                  button
+                  component={props => (
+                    <Link
+                      {...props}
+                      to={{
+                        pathname:
+                          "/buildings/" +
+                          match.params.buildingid +
+                          "/" +
+                          key.id,
+                        state: key
+                      }}
+                    />
+                  )}
+                >
                   <Avatar alt="room icon" src={roomIcon} className="avtr" />
                   <ListItemText
                     className="liText"
