@@ -15,7 +15,8 @@ import "./RoomList.scss";
 const theme = createMuiTheme({
   typography: {
     // Making the List accept our font
-    fontFamily: "Open Sans"
+    fontFamily: "Open Sans",
+    useNextVariants: true
   }
 });
 

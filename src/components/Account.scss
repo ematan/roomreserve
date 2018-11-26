@@ -1,0 +1,14 @@
+@import "../variables";
+
+.h1 {
+  margin: 60px 60px 0 60px;
+}
+
+.profPage {
+  background-size: cover;
+  width: 100vw;
+  min-height: calc(100vh - 40px);
+  background-image: url("../img/bg.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+}
