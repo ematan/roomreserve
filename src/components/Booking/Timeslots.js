@@ -1,5 +1,6 @@
 import React, { Component }from 'react';
-import * as firebase from '../../firebase'
+import { View } from 'react-native';
+import { withFirebase } from '../../firebase'
 import AuthUserContext from "../Session/AuthUserContext";
 
 
@@ -30,7 +31,40 @@ class TimeSlot extends Component {
 	reserveSlot(status, key, value) {
 		const month = this.state.reservationDate.month
 		const date = this.state.reservationDate.day
-		const user = firebase.auth()
+		const user = this.props.authUser
+		const uid = user.uid
+		let userDataJson = {}
+		if(status)
+			userDataJson[key] = uid
+		else
+			userDataJson[key] = null
+
+		this.props.firebase.db.ref('users').child(uid)
+		.child("reservations")
+		.child(month)
+		.child(date)
+		.update(userDataJson)
+	}
+
+	render() {
+		let _this = this
+		const slots = jsonData.slots
+		const arraySlots = Object.keys(slots).map( function(k) {
+      return (  
+      	<View key={k} style={{margin:5}}>
+          <button onPress={(status) => _this.reserveslot(status,k,slots[k]) } text={slots[k]} />
+        </View>
+      )
+    });
+
+    return (
+
+    	<button onPress= {() => this.onPressBack()} text="return" />
+    	<View>
+      { slotsarr }
+      </View>
+    );
+
 	}
 }
 

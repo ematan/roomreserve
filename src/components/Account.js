@@ -1,30 +1,25 @@
 import React, { Component } from "react";
 import Page from "./Page";
-import { auth, db } from "../firebase";
+import { withFirebase } from "../firebase";
 import AuthUserContext from './Session/AuthUserContext';
 
-/*const Account1 = () => (
-	<Page>
-  	<AuthUserContext.Consumer>
-      {authUser => authUser 
-  		? <ProfileView authUser={authUser} /> 
-  		: <h1>No Access</h1>
-  	  }
-  	</AuthUserContext.Consumer>
-  	<ul>
-			<li>username: {authUser}</li>
-			<li>email: {authUser.email}</li>
-		</ul>
-  </Page>
-);
-*/
-
-const ProfileView = ({authUser, users}) => (
+const ProfileView = ({curUser}) => (
 	<div>
 		<h1>Account</h1>
-		
-		
+    <ul>
+      <li>username: {curUser}</li>
+      <li>email: </li>
+    </ul>		
 	</div>
+);
+const ProfileView1 = ({curUser}) => (
+  <div>
+    <h1>Accounttttt</h1>
+    <ul>
+      <li>username: {curUser}</li>
+      <li>email: </li>
+    </ul>   
+  </div>
 );
 
 
@@ -32,32 +27,51 @@ class Account extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      users: null
+      users: null,
+      uid: null,
+      user: null,
     };
   }
 
   componentDidMount() {
-    db.onceGetUsers().then(snapshot =>
+    this.props.firebase.onceGetUsers().then(snapshot =>
       this.setState({ users: snapshot.val() })
     );
     
+    
   }
+
 
   render() {
   	
-  	const { users } = this.state;
-  	console.log(AuthUserContext)
-  	console.log(users);
+  	const { users, authUser } = this.state;
+    const curUser = null
+    //const { uid } = this.props.authUser.uid
+    
+  	if (authUser) {
+      //uid = user.uid;
+      const curUser = users[authUser.uid];
+      //console.log(uid);
+      //console.log(curUser);
+  	} 
+      //uid =null;
+   
+    
+
+    //console.log(user);
   	
-  	console.log(AuthUserContext.Consumer);
+  	//console.log(AuthUserContext.Consumer);
   	return(
   		<Page>
+        
   			<AuthUserContext.Consumer>
-      		{authUser => authUser
-  					? <ProfileView authUser={authUser} users={users}/> 
+      		{authUser => authUser && users
+  					? <ProfileView curUser={authUser.uid} />
   					: <h1>No Access</h1>
+
   	  		}
   			</AuthUserContext.Consumer>
+        
   		</Page>
   		//<ProfileView users={users} />
 
@@ -67,4 +81,4 @@ class Account extends Component {
 }
 
 
-export default Account;
+export default withFirebase(Account);

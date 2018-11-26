@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { db } from "../firebase";
+import { withFirebase } from "../firebase";
 import Page from "./Page";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -27,10 +27,10 @@ class BuildingList extends Component {
   }
 
   componentDidMount() {
-    db.onceGetBuildings().then(snapshot =>
+    this.props.firebase.onceGetBuildings().then(snapshot =>
       this.setState({ buildings: snapshot.val() })
     );
-    db.onceGetRooms().then(snapshot =>
+    this.props.firebase.onceGetRooms().then(snapshot =>
       this.setState({ rooms: snapshot.val() })
     );
   }
@@ -93,4 +93,4 @@ class BuildingList extends Component {
   }
 }
 
-export default BuildingList;
+export default withFirebase(BuildingList);

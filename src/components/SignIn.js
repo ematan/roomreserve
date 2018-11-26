@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 
 import { SignUpLink } from "./SignUp";
-import { auth } from "../firebase";
+import { withFirebase } from "../firebase";
 import * as routes from "../constants/routes";
 import cn from "classnames";
 
@@ -14,7 +14,7 @@ const SignInPage = ({ history }) => (
   <Page className="sipage">
     <div className="signInCont">
       <h1>Sign In</h1>
-      <SignInForm history={history} />
+      <SignInForm /*history={history}*/ />
       <SignUpLink />
     </div>
   </Page>
@@ -24,13 +24,14 @@ const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value
 });
 
+
 const INITIAL_STATE = {
   email: "",
   password: "",
   error: null
 };
 
-class SignInForm extends Component {
+class SignInFormBase extends Component {
   constructor(props) {
     super(props);
 
@@ -40,19 +41,24 @@ class SignInForm extends Component {
   onSubmit = event => {
     const { email, password } = this.state;
 
-    const { history } = this.props;
+    //const { history } = this.props;
 
-    auth
+    //auth
+    this.props.firebase
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
         this.setState({ ...INITIAL_STATE });
-        history.push(routes.LANDING);
+        this.props.history.push(routes.LANDING);
       })
       .catch(error => {
-        this.setState(byPropKey("error", error));
+        this.setState({error});
       });
 
     event.preventDefault();
+  };
+
+  onChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
   };
 
   render() {
@@ -64,17 +70,21 @@ class SignInForm extends Component {
       <form onSubmit={this.onSubmit} className="signInForm">
         <input
           value={email}
-          onChange={event =>
+          name="email"
+          /*onChange={event =>
             this.setState(byPropKey("email", event.target.value))
-          }
+          }*/
+          onChange={this.onChange}
           type="text"
           placeholder="Email Address"
         />
         <input
           value={password}
-          onChange={event =>
+          name="password"
+          /*onChange={event =>
             this.setState(byPropKey("password", event.target.value))
-          }
+          */
+          onChange={this.onChange}
           type="password"
           placeholder="Password"
         />
@@ -92,6 +102,8 @@ class SignInForm extends Component {
   }
 }
 
-export default withRouter(SignInPage);
+const SignInForm = withRouter(withFirebase(SignInFormBase));
+
+export default SignInPage;
 
 export { SignInForm };

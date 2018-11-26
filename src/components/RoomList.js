@@ -7,7 +7,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Avatar from "@material-ui/core/Avatar";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import roomIcon from "../img/room.png";
-import { db } from "../firebase";
+import { withFirebase } from "../firebase";
 import { Link } from "react-router-dom";
 
 import "./RoomList.scss";
@@ -28,7 +28,7 @@ class RoomList extends Component {
   }
 
   componentDidMount() {
-    db.onceGetBuildings().then(snapshot =>
+    this.props.firebase.onceGetBuildings().then(snapshot =>
       this.setState({ buildings: snapshot.val() })
     );
   }
@@ -87,4 +87,4 @@ class RoomList extends Component {
   }
 }
 
-export default RoomList;
+export default withFirebase(RoomList);
