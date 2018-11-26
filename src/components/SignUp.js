@@ -2,12 +2,13 @@ import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { auth } from "../firebase";
 import Page from "./Page";
+import cn from "classnames";
 
 import * as routes from "../constants/routes";
 import "./SignUp.scss";
 
 const SignUpPage = ({ history }) => (
-  <Page>
+  <Page className="supage">
     <h1>SignUp</h1>
     <SignUpForm history={history} />
   </Page>
@@ -92,7 +93,11 @@ class SignUpForm extends Component {
           type="password"
           placeholder="Confirm Password"
         />
-        <button className="btn" disabled={isInvalid} type="submit">
+        <button
+          className={cn("btn", { disabled: isInvalid })}
+          disabled={isInvalid}
+          type="submit"
+        >
           Sign Up
         </button>
 

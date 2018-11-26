@@ -4,15 +4,16 @@ import { withRouter } from "react-router-dom";
 import { SignUpLink } from "./SignUp";
 import { auth } from "../firebase";
 import * as routes from "../constants/routes";
+import cn from "classnames";
 
 import Page from "./Page";
 
 import "./SignIn.scss";
 
 const SignInPage = ({ history }) => (
-  <Page className="page">
+  <Page className="sipage">
     <div className="signInCont">
-      <h1>SignIn</h1>
+      <h1>Sign In</h1>
       <SignInForm history={history} />
       <SignUpLink />
     </div>
@@ -77,7 +78,11 @@ class SignInForm extends Component {
           type="password"
           placeholder="Password"
         />
-        <button className="btn" disabled={isInvalid} type="submit">
+        <button
+          className={cn("btn", { disabled: isInvalid })}
+          disabled={isInvalid}
+          type="submit"
+        >
           Sign In
         </button>
 

@@ -9,7 +9,7 @@ import "./Room.scss";
 class Room extends Component {
   render() {
     return (
-      <div className="room">
+      <Page className="room">
         <div className="header">
           <h1>{this.props.location.state.name}</h1>
         </div>
@@ -40,7 +40,7 @@ class Room extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </Page>
     );
   }
 }

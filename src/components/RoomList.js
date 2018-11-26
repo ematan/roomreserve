@@ -36,7 +36,7 @@ class RoomList extends Component {
   render() {
     const { location, match } = this.props;
     return (
-      <Page className="page">
+      <Page className="rpage">
         <h1 className="h1">
           {this.state.buildings &&
             this.state.buildings[match.params.buildingid].name}

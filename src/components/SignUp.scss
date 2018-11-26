@@ -1,3 +1,16 @@
 h1 {
   text-align: center;
 }
+
+.supage {
+  width: 100vw;
+  height: calc(100vh - 40px);
+  background: url("../img/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.disabled {
+  background-color: lightgrey;
+  color: grey;
+}
