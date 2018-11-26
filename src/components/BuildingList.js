@@ -52,7 +52,7 @@ class BuildingList extends Component {
     }
 
     return (
-      <Page className="page">
+      <div className="bpage">
         <h1>Buildings</h1>
         <MuiThemeProvider theme={theme}>
           <List dense className="list">
@@ -88,7 +88,7 @@ class BuildingList extends Component {
             ))}
           </List>
         </MuiThemeProvider>
-      </Page>
+      </div>
     );
   }
 }
