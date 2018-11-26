@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import Page from "./Page";
+
 import { withFirebase } from "../firebase";
 import AuthUserContext from './Session/AuthUserContext';
 
+import "./Account.scss";
+
 const ProfileView = ({curUser}) => (
-	<div>
+	<Page className="profPage">
 		<h1>Account</h1>
     <ul>
       <li>username: {curUser}</li>
       <li>email: </li>
     </ul>		
-	</div>
+	</Page>
+
 );
 const ProfileView1 = ({curUser}) => (
   <div>
@@ -56,11 +60,7 @@ class Account extends Component {
   	} 
       //uid =null;
    
-    
-
-    //console.log(user);
-  	
-  	//console.log(AuthUserContext.Consumer);
+  
   	return(
   		<Page>
         

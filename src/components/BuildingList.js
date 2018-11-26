@@ -14,7 +14,8 @@ import { Link } from "react-router-dom";
 const theme = createMuiTheme({
   typography: {
     // Making the List accept our font
-    fontFamily: "Open Sans"
+    fontFamily: "Open Sans",
+    useNextVariants: true
   }
 });
 

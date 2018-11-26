@@ -9,23 +9,20 @@ h1 {
   padding-top: 40px;
   background-size: cover;
   width: 100vw;
-  height: calc(100vh - 40px);
   background-image: url("../img/bg.jpg");
   background-repeat: no-repeat;
 }
 
 .list {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0);
+  width: 90%;
+  margin: 0 auto !important;
 }
 
 .list a {
   text-align: center;
   margin: 5px 0 !important;
-  background: linear-gradient(
-    135deg,
-    rgba(98, 146, 158, 0.1) 30%,
-    rgba(98, 146, 158, 0.3) 90%
-  );
+  background: rgba(255, 255, 255, 0.6);
 }
 
 .avtr {
