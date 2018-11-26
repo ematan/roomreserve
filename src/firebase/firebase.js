@@ -19,7 +19,11 @@ const auth = firebase.auth();
 
 const db = firebase.database();
 
+const user = uid => db.ref(`users/${uid}`);
+
 export {
   auth,
   db,
 };
+
+

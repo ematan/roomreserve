@@ -35,7 +35,6 @@ const withAuth = (Component) =>
 		}
 	}
 
-	//return WithAuth;
 
 
 export default withAuth;
