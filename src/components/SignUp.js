@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
 //import { auth , db } from "../firebase";
-import {withFirebase} from "../firebase";
+import { withFirebase } from "../firebase";
 import Page from "./Page";
 import cn from "classnames";
 
@@ -34,7 +34,7 @@ class SignUpFormBase extends Component {
   }
 
   onSubmit = event => {
-    const { email, passwordOne } = this.state;
+    const { username, email, passwordOne } = this.state;
 
     //const { history } = this.props;
 
@@ -42,7 +42,7 @@ class SignUpFormBase extends Component {
     this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        this.props.firebase//db 
+        this.props.firebase //db
           .doCreateUser(authUser.user.uid, username, email)
           .then(() => {
             this.setState({ ...INITIAL_STATE });
@@ -55,7 +55,7 @@ class SignUpFormBase extends Component {
       .catch(error => {
         this.setState(byPropKey("error", error));
       });
-      
+
     event.preventDefault();
   };
 

@@ -14,6 +14,7 @@ const SignOutButton = ({ firebase }) => (
 
 export default withFirebase(SignOutButton);
 
+/*const SignOut = ({history}) => (
   //<button type="button" onClick={auth.doSignOut().then(()=> history.push(routes.LANDING))}>
   //  <img className="logo-icon" src={logout} alt="logo" />
   //</button>
