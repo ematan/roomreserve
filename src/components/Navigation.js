@@ -21,6 +21,18 @@ const Navigation = () => (
   </div>
 );
 
+
+/*const Navigation = ({authUser}) => (
+  <div id="navbar">
+   
+      {authUser 
+        ? <NavigationLoggedIn /> 
+        : <NavigationLoggedOut />
+      }
+
+  </div>
+);*/
+
 const NavigationLoggedIn = () => (
   <div className="navContainer">
     <ul>

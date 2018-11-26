@@ -11,3 +11,19 @@ export const onceGetRooms = () =>
     .ref()
     .child("rooms")
     .once("value");
+
+export const doCreateUser = (id, username, email) =>
+	db.ref(`users/${id}`).set({
+		username,
+		email,
+	});
+
+export const onceGetUsers = () =>
+  db
+	  .ref('users')
+	  .once('value');
+
+export const onceUser = (uid) =>
+  db.ref(`users/${uid}`);
+
+

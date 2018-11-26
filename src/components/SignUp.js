@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link, withRouter } from "react-router-dom";
-import { auth } from "../firebase";
+//import { auth , db } from "../firebase";
+import {withFirebase} from "../firebase";
 import Page from "./Page";
 import cn from "classnames";
 
@@ -10,7 +11,7 @@ import "./SignUp.scss";
 const SignUpPage = ({ history }) => (
   <Page className="supage">
     <h1>SignUp</h1>
-    <SignUpForm history={history} />
+    <SignUpForm />
   </Page>
 );
 
@@ -26,7 +27,7 @@ const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value
 });
 
-class SignUpForm extends Component {
+class SignUpFormBase extends Component {
   constructor(props) {
     super(props);
     this.state = { ...INITIAL_STATE };
@@ -35,18 +36,26 @@ class SignUpForm extends Component {
   onSubmit = event => {
     const { email, passwordOne } = this.state;
 
-    const { history } = this.props;
+    //const { history } = this.props;
 
-    auth
+    //auth
+    this.props.firebase
       .doCreateUserWithEmailAndPassword(email, passwordOne)
       .then(authUser => {
-        this.setState({ ...INITIAL_STATE });
-        history.push(routes.LANDING);
+        this.props.firebase//db 
+          .doCreateUser(authUser.user.uid, username, email)
+          .then(() => {
+            this.setState({ ...INITIAL_STATE });
+            this.props.history.push(routes.LANDING);
+          })
+          .catch(error => {
+            this.setState(byPropKey("error", error));
+          });
       })
       .catch(error => {
         this.setState(byPropKey("error", error));
       });
-
+      
     event.preventDefault();
   };
 
@@ -113,6 +122,8 @@ const SignUpLink = () => (
   </p>
 );
 
-export default withRouter(SignUpPage);
+const SignUpForm = withRouter(withFirebase(SignUpFormBase));
+
+export default SignUpPage;
 
 export { SignUpForm, SignUpLink };

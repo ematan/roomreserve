@@ -11,6 +11,8 @@ import AccountPage from "./components/Account";
 import BuildingList from "./components/BuildingList";
 import RoomList from "./components/RoomList";
 import Room from "./components/Room";
+import Calendar from "./components/Booking/Calendar";
+
 
 import * as routes from "./constants/routes";
 //import { firebase } from "./firebase";
@@ -34,6 +36,7 @@ const App = () => (
       <Route exact path={routes.BUILDINGS} component={BuildingList} />
       <Route exact path={routes.BUILDING_ROOMS} component={RoomList} />
       <Route exact path={routes.ROOM} component={Room} />
+      <Route exact path={routes.CALENDAR} component={Calendar} />
     </div>
   </Router>
 );
