@@ -18,9 +18,9 @@ export default withFirebase(SignOutButton);
   //<button type="button" onClick={auth.doSignOut().then(()=> history.push(routes.LANDING))}>
   //  <img className="logo-icon" src={logout} alt="logo" />
   //</button>
-  <SignOutButton history={history} />
-);
-
+ // <SignOutButton history={history} />
+//);
+/*
 class SignOutButton extends Component {
   onClick = event => {
     const { history } = this.props;
@@ -39,6 +39,6 @@ class SignOutButton extends Component {
   }
 }
 
-export default withRouter(SignOut);
+//export default withRouter(SignOut);
 
 export { SignOutButton };*/

@@ -8,3 +8,4 @@ export const BUILDING_ROOMS = "/buildings/:buildingid";
 export const ROOM = "/buildings/:buildingid/:roomid";
 
 export const CALENDAR = "/calendar";
+export const SLOTS = "/calendar/:month/:day";

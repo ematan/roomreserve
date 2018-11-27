@@ -1,7 +1,7 @@
 import React, { Component }from 'react';
-import { View } from 'react-native';
 import { withFirebase } from '../../firebase'
 import AuthUserContext from "../Session/AuthUserContext";
+import dateFns from "date-fns";
 
 
 const jsonData = {
@@ -19,7 +19,8 @@ class TimeSlot extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			reservationDate: this.props.navigation.state.params.reservationDate
+			reservationDate: this.props.navigation.state.params.reservationDate,
+			key: 1
 		}
 	}
 
@@ -50,22 +51,22 @@ class TimeSlot extends Component {
 		let _this = this
 		const slots = jsonData.slots
 		const arraySlots = Object.keys(slots).map( function(k) {
-      return (
-      	<View key={k} style={{margin:5}}>
+      return (  
+      	<div key={k} style={{margin:5}}>
           <button onPress={(status) => _this.reserveslot(status,k,slots[k]) } text={slots[k]} />
-        </View>
+        </div>
       )
     });
 
     return (
-
+    	<div>
+    	MOI
     	<button onPress= {() => this.onPressBack()} text="return" />
-    	<View>
-      { slotsarr }
-      </View>
+    	<div>{ arraySlots }</div>
+    	</div>
     );
 
 	}
 }
 
-export default Timeslot;
+export default TimeSlot;

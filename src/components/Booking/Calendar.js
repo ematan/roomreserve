@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import dateFns from "date-fns";
 import Page from "../Page";
 import "./Calendar.scss";
+//import TimeSlot from './Timeslots';
+import { Link } from "react-router-dom";
 
 class Calendar extends Component {
   constructor(props) {
@@ -70,6 +72,7 @@ class Calendar extends Component {
       for (let i = 0; i < 7; i++) {
         formattedDate = dateFns.format(day, dateFormat);
         const cloneDay = day;
+        console.log(day)
         days.push(
           <div
             className={`col cell ${
@@ -81,8 +84,20 @@ class Calendar extends Component {
                     ? "currDate"
                     : ""
             }`}
+
             key={day}
             onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
+            button
+            component={props => (
+              <Link
+                {...props}
+                to={{
+                  pathname: "/calendar/" + formattedDate,
+                  state: formattedDate
+                }}
+              /> 
+            )}
+
           >
             <span className="number">{formattedDate}</span>
           </div>
@@ -103,6 +118,8 @@ class Calendar extends Component {
     this.setState({
       selectedDate: day
     });
+
+
   };
 
   nextMonth = () => {
