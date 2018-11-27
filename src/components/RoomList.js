@@ -7,6 +7,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import Avatar from "@material-ui/core/Avatar";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import roomIcon from "../img/room.png";
+import arrowBack from "../img/arrow-back-white.png";
 import { withFirebase } from "../firebase";
 import { Link } from "react-router-dom";
 
@@ -29,15 +30,21 @@ class RoomList extends Component {
   }
 
   componentDidMount() {
-    this.props.firebase.onceGetBuildings().then(snapshot =>
-      this.setState({ buildings: snapshot.val() })
-    );
+    this.props.firebase
+      .onceGetBuildings()
+      .then(snapshot => this.setState({ buildings: snapshot.val() }));
   }
 
   render() {
     const { location, match } = this.props;
     return (
       <Page className="rpage">
+        <div className="back">
+          <a href="/buildings">
+            <img className="arrow" src={arrowBack} alt="arrow back" />
+            <p>Back</p>
+          </a>
+        </div>
         <h1 className="h1">
           {this.state.buildings &&
             this.state.buildings[match.params.buildingid].name}

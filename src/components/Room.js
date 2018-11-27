@@ -3,15 +3,32 @@ import Page from "./Page";
 import locIcon from "../img/location.png";
 import numPeople from "../img/numPeople.png";
 import availableIcon from "../img/available.png";
+import arrowBack from "../img/arrow-back-white.png";
 
 import "./Room.scss";
 
 class Room extends Component {
+  constructor(props) {
+    super(props);
+    this.back = this.back.bind(this);
+  }
+
+  back(e) {
+    e.stopPropagation();
+    this.props.history.goBack();
+  }
+
   render() {
     return (
       <Page className="room">
+        <div className="back">
+          <button type="button" onClick={this.back}>
+            <img className="arrow" src={arrowBack} alt="arrow back" />
+            <p>Back</p>
+          </button>
+        </div>
         <div className="header">
-          <h1>{this.props.location.state.name}</h1>
+          <h1 className="h1">{this.props.location.state.name}</h1>
         </div>
         <div className="roomInfo">
           <div className="line">
@@ -36,7 +53,7 @@ class Room extends Component {
           </div>
           <div className="line">
             <div className="link">
-              <a href="/">Book this room</a>
+              <a href="/calendar">Book this room</a>
             </div>
           </div>
         </div>

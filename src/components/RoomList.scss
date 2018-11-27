@@ -1,7 +1,28 @@
 @import "../variables";
 
 .h1 {
-  margin: 60px 60px 0 60px;
+  margin: 0 60px 60px;
+}
+
+.back {
+  display: inline-block;
+}
+
+.back * {
+  float: left;
+}
+
+.back a {
+  color: black;
+}
+
+.back p {
+  margin-top: 12px;
+}
+
+.arrow {
+  height: 50px;
+  width: 50px;
 }
 
 .address {
