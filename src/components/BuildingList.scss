@@ -9,6 +9,7 @@ h1 {
   padding-top: 40px;
   background-size: cover;
   width: 100vw;
+  min-height: 100vh;
   background-image: url("../img/bg.jpg");
   background-repeat: no-repeat;
 }
@@ -33,6 +34,35 @@ h1 {
 .avtr {
   height: 50px !important;
   width: 50px !important;
+}
+
+.filter {
+  height: 40px;
+  width: 40px;
+}
+
+.filterbtn {
+  float: right;
+}
+
+.popperContent {
+  background-color: $white;
+  height: 200px;
+  width: 160px;
+  padding: 20px;
+}
+
+.popperContent > * {
+  float: right;
+}
+
+.popperContent > p {
+  font-size: 12px !important;
+  text-transform: uppercase;
+}
+
+.popperContent > button {
+  margin: 20px;
 }
 
 .liText {
