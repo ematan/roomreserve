@@ -1,30 +1,24 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import dateFns from "date-fns";
 import Page from "../Page";
 import "./Calendar.scss";
-
-
 
 class Calendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
       currentMonth: new Date(),
-    	selectedDate: new Date()
+      selectedDate: new Date()
     };
   }
-
 
   renderHeader() {
     const dateFormat = "MMMM YYYY";
 
     return (
       <div>
-        
-          <div onClick={this.prevMonth}>
-            previous
-          </div>
-        
+        <div onClick={this.prevMonth}>previous</div>
+
         <div>
           <span>{dateFns.format(this.state.currentMonth, dateFormat)}</span>
         </div>
@@ -39,7 +33,9 @@ class Calendar extends Component {
     const dateFormat = "dddd";
     const days = [];
 
-    let startDate = dateFns.startOfWeek(this.state.currentMonth, {weekStartsOn: 1});
+    let startDate = dateFns.startOfWeek(this.state.currentMonth, {
+      weekStartsOn: 1
+    });
 
     for (let i = 0; i < 7; i++) {
       days.push(
@@ -56,7 +52,7 @@ class Calendar extends Component {
     const { currentMonth, selectedDate } = this.state;
     const monthStart = dateFns.startOfMonth(currentMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
-    const startDate = dateFns.startOfWeek(monthStart, {weekStartsOn: 1});
+    const startDate = dateFns.startOfWeek(monthStart, { weekStartsOn: 1 });
     const endDate = dateFns.endOfWeek(monthEnd);
 
     const dateFormat = "D";
@@ -75,13 +71,14 @@ class Calendar extends Component {
             className={`col cell ${
               !dateFns.isSameMonth(day, monthStart)
                 ? "disabled"
-                : dateFns.isSameDay(day, selectedDate) ? "selected" : ""
+                : dateFns.isSameDay(day, selectedDate)
+                  ? "selected"
+                  : ""
             }`}
             key={day}
             onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
           >
             <span className="number">{formattedDate}</span>
-            
           </div>
         );
         day = dateFns.addDays(day, 1);
@@ -116,12 +113,12 @@ class Calendar extends Component {
 
   render() {
     return (
-    	<Page>
-      <div className="calendar">
-        {this.renderHeader()}
-        {this.renderDays()}
-        {this.renderCells()}
-      </div>
+      <Page>
+        <div className="calendar">
+          {this.renderHeader()}
+          {this.renderDays()}
+          {this.renderCells()}
+        </div>
       </Page>
     );
   }

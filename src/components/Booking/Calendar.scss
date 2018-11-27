@@ -1,4 +1,3 @@
-
 /* FONT IMPORTS */
 
 //@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
@@ -23,7 +22,6 @@
   font-feature-settings: 'liga';
 }*/
 
-
 /* VARIABLES */
 /*
 :root {
@@ -43,24 +41,20 @@
 }
 
 body {
-    //font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
-    //font-size: 1em;
-    //font-weight: 300;
-    line-height: 1.5;
-    //color: var(--text-color);
-    //background: var(--bg-color);
-    position: relative;
+  //font-family: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+  //font-size: 1em;
+  //font-weight: 300;
+  line-height: 1.5;
+  //color: var(--text-color);
+  //background: var(--bg-color);
+  position: relative;
 }
 
 header {
   display: block;
   width: 100%;
   padding: 3em 2;
-  
 }
-
-
-
 
 main {
   display: block;
@@ -68,7 +62,6 @@ main {
   margin-top: 5em;
   max-width: 50em;
 }
-
 
 /* GRID */
 
@@ -106,7 +99,6 @@ main {
   text-align: right;
 }
 
-
 /* Calendar */
 
 .calendar {
@@ -124,13 +116,12 @@ main {
   border-bottom: 1px solid black;
 }
 
-
 .calendar .days {
   text-transform: uppercase;
   font-weight: 400;
-  
+
   font-size: 70%;
-  padding: .75em 0;
+  padding: 0.75em 0;
   border-bottom: 1px solid black;
 }
 
@@ -143,7 +134,7 @@ main {
 }
 
 .calendar .body .selected {
-  background: green;  
+  background: green;
 }
 
 .calendar .body .row:last-child {
@@ -161,6 +152,6 @@ main {
 
 .calendar .body .col {
   flex-grow: 0;
-  flex-basis: calc(100%/7);
-  width: calc(100%/7);
+  flex-basis: calc(100% / 7);
+  width: calc(100% / 7);
 }

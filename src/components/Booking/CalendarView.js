@@ -1,14 +1,13 @@
 import React, { Component } from "react";
-import { Calendar } from 'react-native-calendars';
+import { Calendar } from "react-native-calendars";
 
 class Cal extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {};
-	    //this.onDayPress = this.onDayPress.bind(this);
-
-	}
-/*
+  constructor(props) {
+    super(props);
+    this.state = {};
+    //this.onDayPress = this.onDayPress.bind(this);
+  }
+  /*
 	onDayPress(day) {
 		this.setState({
 			selected: day.dateString
@@ -22,19 +21,18 @@ class Cal extends Component {
 		goBack()
 	}
 */
-	render() {
-		return (
-			<div>
-			Moi
-				<Calendar
-					//onDayPress = { this.onDayPress }
-					hideExtraDays
-					//markedDates = {{[this.state.selected]: {selected: true}}}
-
-				/>
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div>
+        Moi
+        <Calendar
+          //onDayPress = { this.onDayPress }
+          hideExtraDays
+          //markedDates = {{[this.state.selected]: {selected: true}}}
+        />
+      </div>
+    );
+  }
 }
 
 export default Cal;

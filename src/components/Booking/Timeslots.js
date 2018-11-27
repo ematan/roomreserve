@@ -50,7 +50,7 @@ class TimeSlot extends Component {
 		let _this = this
 		const slots = jsonData.slots
 		const arraySlots = Object.keys(slots).map( function(k) {
-      return (  
+      return (
       	<View key={k} style={{margin:5}}>
           <button onPress={(status) => _this.reserveslot(status,k,slots[k]) } text={slots[k]} />
         </View>
