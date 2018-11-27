@@ -12,7 +12,7 @@ h1 {
 
 .room {
   width: 100vw;
-  height: calc(100vh - 40px);
+  height: calc(100vh);
   background: $beige url("../img/room.jpg");
   background-repeat: no-repeat;
   background-position: center;
@@ -52,10 +52,11 @@ h1 {
 }
 
 .largeIcon {
-  height: 50px;
-  width: 50px;
+  height: 60px;
+  width: 60px;
   display: inline-block;
   padding-top: 10px;
+  padding-right: 10px;
 }
 
 @media only screen and (max-width: 600px) {

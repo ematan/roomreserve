@@ -8,7 +8,8 @@ class Calendar extends Component {
     super(props);
     this.state = {
       currentMonth: new Date(),
-      selectedDate: new Date()
+      selectedDate: new Date(),
+      currentDate: new Date()
     };
   }
 
@@ -16,13 +17,14 @@ class Calendar extends Component {
     const dateFormat = "MMMM YYYY";
 
     return (
-      <div>
-        <div onClick={this.prevMonth}>previous</div>
-
-        <div>
+      <div className="hdr">
+        <div className="prev" onClick={this.prevMonth}>
+          previous
+        </div>
+        <div className="curMonth">
           <span>{dateFns.format(this.state.currentMonth, dateFormat)}</span>
         </div>
-        <div onClick={this.nextMonth}>
+        <div className="next" onClick={this.nextMonth}>
           <div>next</div>
         </div>
       </div>
@@ -40,7 +42,9 @@ class Calendar extends Component {
     for (let i = 0; i < 7; i++) {
       days.push(
         <div className="col col-center" key={i}>
-          {dateFns.format(dateFns.addDays(startDate, i), dateFormat)}
+          {dateFns
+            .format(dateFns.addDays(startDate, i), dateFormat)
+            .substring(0, 3)}
         </div>
       );
     }
@@ -49,7 +53,7 @@ class Calendar extends Component {
   }
 
   renderCells() {
-    const { currentMonth, selectedDate } = this.state;
+    const { currentMonth, selectedDate, currentDate } = this.state;
     const monthStart = dateFns.startOfMonth(currentMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart, { weekStartsOn: 1 });
@@ -73,7 +77,9 @@ class Calendar extends Component {
                 ? "disabled"
                 : dateFns.isSameDay(day, selectedDate)
                   ? "selected"
-                  : ""
+                  : dateFns.isSameDay(day, currentDate)
+                    ? "currDate"
+                    : ""
             }`}
             key={day}
             onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
@@ -113,7 +119,7 @@ class Calendar extends Component {
 
   render() {
     return (
-      <Page>
+      <Page className="calPage">
         <div className="calendar">
           {this.renderHeader()}
           {this.renderDays()}

@@ -1,38 +1,4 @@
-/* FONT IMPORTS */
-
-//@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,400,700);
-//@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
-
-/*
-.icon {
-  font-family: 'Material Icons', serif;
-  font-style: normal;
-  display: inline-block;
-  vertical-align: middle;
-  line-height: 1;
-  text-transform: none;
-  letter-spacing: normal;
-  word-wrap: normal;
-  white-space: nowrap;
-  direction: ltr;
-
-  -webkit-font-smoothing: antialiased;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-  font-feature-settings: 'liga';
-}*/
-
-/* VARIABLES */
-/*
-:root {
-  --main-color: #1a8fff;
-  --text-color: #777;
-  --text-color-light: #ccc;
-  --border-color: #eee;
-  --bg-color: #f9f9f9;
-  --neutral-color: #fff;
-}
-*/
+@import "../../variables";
 
 /* GENERAL */
 
@@ -72,6 +38,8 @@ main {
   flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
+  border: 1px solid black;
+  border-top: none;
 }
 
 .row-middle {
@@ -82,6 +50,10 @@ main {
   flex-grow: 1;
   flex-basis: 0;
   max-width: 100%;
+}
+
+.col .number {
+  padding-left: 5px;
 }
 
 .col-start {
@@ -101,11 +73,39 @@ main {
 
 /* Calendar */
 
+.hdr {
+  display: table;
+  width: 100%;
+}
+
+.prev {
+  display: table-cell;
+  float: left;
+  padding-left: 10px;
+  color: grey;
+  font-size: 14px;
+}
+
+.curMonth {
+  display: table-cell;
+  text-align: center;
+  font-size: 22px;
+}
+
+.next {
+  display: table-cell;
+  float: right;
+  padding-right: 10px;
+  color: grey;
+  font-size: 14px;
+}
+
 .calendar {
   display: block;
   position: relative;
-  width: 100%;
-  border: 1px solid;
+  width: 80%;
+  border-bottom: 1px solid black;
+  margin: 0 auto;
 }
 
 .calendar .header {
@@ -120,9 +120,11 @@ main {
   text-transform: uppercase;
   font-weight: 400;
 
-  font-size: 70%;
+  font-size: 90%;
   padding: 0.75em 0;
   border-bottom: 1px solid black;
+  border-right: none;
+  border-left: none;
 }
 
 .calendar .body .cell {
@@ -134,7 +136,13 @@ main {
 }
 
 .calendar .body .selected {
-  background: green;
+  background: $blue-light;
+  font-weight: 600;
+}
+
+.calendar .body .currDate {
+  background: #cfdee1;
+  font-weight: 600;
 }
 
 .calendar .body .row:last-child {
@@ -146,7 +154,7 @@ main {
 }
 
 .calendar .body .disabled {
-  color: red;
+  color: #606060;
   pointer-events: none;
 }
 
@@ -154,4 +162,14 @@ main {
   flex-grow: 0;
   flex-basis: calc(100% / 7);
   width: calc(100% / 7);
+}
+
+@media only screen and (max-width: 600px) {
+  .calendar {
+    width: 95%;
+  }
+
+  .calendar .days {
+    font-size: 70%;
+  }
 }
