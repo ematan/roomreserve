@@ -5,6 +5,7 @@ import { withFirebase } from "../firebase";
 import AuthUserContext from "./Session/AuthUserContext";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
+import { Link } from "react-router-dom";
 
 
 import "./Account.scss";
@@ -130,8 +131,18 @@ class Account extends Component {
                 {reservations && reservations[authUser.uid] && reservations[authUser.uid].map(key =>(
                    <ListItem 
                       key={key.room.name + key.month + key.day + key.slot} 
-                      component=
-                   >
+                      component={props => (
+                          <Link
+                            {...props}
+                            to={{
+                              pathname: "/cancel",
+                              state: key
+                            }}
+                            />
+                        )
+
+                      }
+                    >
                       {key.room.name}:{key.day}.{key.month} -- {times[key.slot]}
 
                     </ListItem>

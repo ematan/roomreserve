@@ -9,3 +9,4 @@ export const ROOM = "/buildings/:buildingid/:roomid";
 
 export const CALENDAR = "/calendar/:buildingid/:roomid";
 export const SLOTS = "/calendar/:month-:day";
+export const CANCEL = "/cancel";
