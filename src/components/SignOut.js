@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import React from "react";
+//import { withRouter } from "react-router-dom";
 //import { auth } from "../firebase";
 import { withFirebase } from "../firebase";
-import * as routes from "../constants/routes";
+//import * as routes from "../constants/routes";
 import logout from "../img/logout.png";
 import "./SignOut.scss";
 

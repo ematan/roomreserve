@@ -20,9 +20,9 @@ const SignInPage = ({ history }) => (
   </Page>
 );
 
-const byPropKey = (propertyName, value) => () => ({
+/*const byPropKey = (propertyName, value) => () => ({
   [propertyName]: value
-});
+});*/
 
 
 const INITIAL_STATE = {

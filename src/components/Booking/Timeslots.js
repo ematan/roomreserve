@@ -2,10 +2,12 @@ import React, { Component }from 'react';
 import { withFirebase } from '../../firebase'
 import AuthUserContext from "../Session/AuthUserContext";
 import dateFns from "date-fns";
+import ListItem from "@material-ui/core/ListItem";
+import ListItemText from "@material-ui/core/ListItemText";
 
 
 const jsonData = {
-	"timeslots" : {
+	"slots" : {
 		"slot1": "8.00 to 10:00",
 		"slot2": "10.00 to 12:00",
 		"slot3": "12.00 to 14:00",
@@ -19,20 +21,33 @@ class TimeSlot extends Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			reservationDate: this.props.navigation.state.params.reservationDate,
-			key: 1
+			reservationDate: this.props.location.state.selectedDay,
+			reservationMonth: this.props.location.state.selectedMonth,
+			room:this.props.location.state.room,
+			building: this.props.location.state.building,
+			users: null
+			
 		}
 	}
+
+	componentDidMount() {
+    this.props.firebase.onceGetUsers().then(snapshot =>
+      this.setState({ users: snapshot.val() })
+    );
+    
+    
+  }
 
 	onPressBack() {
 		const { goBack } = this.props.navigation
 		goBack()
 	}
 
-	reserveSlot(status, key, value) {
-		const month = this.state.reservationDate.month
-		const date = this.state.reservationDate.day
-		const user = this.props.authUser
+	reserveSlot(status, key, value, user) {
+		const month = this.state.reservationMonth
+		const date = this.state.reservationDate
+		const room = "r-" + this.state.room
+		//const user = this.props.authUser
 		const uid = user.uid
 		let userDataJson = {}
 		if(status)
@@ -40,7 +55,7 @@ class TimeSlot extends Component {
 		else
 			userDataJson[key] = null
 
-		this.props.firebase.db.ref('users').child(uid)
+		this.props.firebase.db.ref('rooms').child(room)
 		.child("reservations")
 		.child(month)
 		.child(date)
@@ -51,22 +66,40 @@ class TimeSlot extends Component {
 		let _this = this
 		const slots = jsonData.slots
 		const arraySlots = Object.keys(slots).map( function(k) {
-      return (  
-      	<div key={k} style={{margin:5}}>
-          <button onPress={(status) => _this.reserveslot(status,k,slots[k]) } text={slots[k]} />
+      return (
+      	<AuthUserContext.Consumer>
+      	{authUser => authUser  
+      	 ? (<div key={k} style={{margin:5}}>
+      	{k} : {slots[k]}
+        <div
+        	onClick={(status) => {
+        		console.log("Click!");
+        		_this.reserveSlot(status,k,slots[k], authUser) }} 
+        >	
+          "moi"
         </div>
+      	
+        </div>)
+      	 :<div> Errorteksti </div>
+        }
+    	</AuthUserContext.Consumer>
       )
     });
 
     return (
     	<div>
-    	MOI
-    	<button onPress= {() => this.onPressBack()} text="return" />
-    	<div>{ arraySlots }</div>
+    	 
+    	
+		    	<button //onPress= {() => this.onPressBack()} 
+		    	  text="return" />
+		    	<div><h1>MOI</h1>
+		    	{ arraySlots }</div>
+
+    		
     	</div>
     );
 
 	}
 }
 
-export default TimeSlot;
+export default withFirebase(TimeSlot);
