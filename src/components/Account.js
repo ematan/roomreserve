@@ -67,19 +67,14 @@ class Account extends Component {
         if (reservations) {
           const roomOnly = r[1];
           delete roomOnly.reservations;
-           
           Object.entries(reservations).forEach(m => {
             const months = m[1]
             if (months){
-              
               Object.entries(months).forEach(d => {
-                const days = d[1]
-                
-                
+                const days = d[1] 
                 if(days){
                   Object.entries(days).forEach(slot => {
-                    //console.log(slot[0])
-                    //if (slot[1] == authUser.uid){
+                    
                       let data = []
                       if (!fullList[slot[1]]){
                         fullList[slot[1]] = data
@@ -98,14 +93,10 @@ class Account extends Component {
             }
           
           })
-            
-         
+      
         }
       });
     }
-    
-    console.log(fullList)
-     
     
     return fullList
   }
@@ -113,7 +104,6 @@ class Account extends Component {
   render() {
     const { users, authUser, rooms, reservations } = this.state;
     const _this = this
-    console.log(this.state.reservations)
     const times = jsonData
 
     
