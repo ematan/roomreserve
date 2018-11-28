@@ -13,6 +13,7 @@ import RoomList from "./components/RoomList";
 import Room from "./components/Room";
 import Calendar from "./components/Booking/Calendar";
 import TimeSlot from "./components/Booking/Timeslots";
+import Cancellation from "./components/Booking/Cancel";
 
 import * as routes from "./constants/routes";
 //import { firebase } from "./firebase";
@@ -38,6 +39,7 @@ const App = () => (
       <Route exact path={routes.ROOM} component={Room} />
       <Route exact path={routes.CALENDAR} component={Calendar} />
       <Route exact path={routes.SLOTS} component={TimeSlot} />
+      <Route exact path={routes.CANCEL} component={Cancellation} />
     </div>
   </Router>
 );
