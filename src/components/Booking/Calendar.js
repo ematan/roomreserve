@@ -3,6 +3,7 @@ import dateFns from "date-fns";
 import Page from "../Page";
 import "./Calendar.scss";
 import { Link } from "react-router-dom";
+import arrowBackBlack from "../../img/arrow-back.png";
 
 class Calendar extends Component {
   constructor(props) {
@@ -14,6 +15,12 @@ class Calendar extends Component {
       selectedDay: new Date(),
       selectedMonth: new Date()
     };
+    this.back = this.back.bind(this);
+  }
+
+  back(e) {
+    e.stopPropagation();
+    this.props.history.goBack();
   }
 
   renderHeader() {
@@ -78,13 +85,10 @@ class Calendar extends Component {
           room: match.params.roomid,
           building: match.params.buildingid,
           selectedDay: day.getDate(),
-          selectedMonth: day.getMonth()+1
-        }
-        
-        days.push(
-          
-            
+          selectedMonth: day.getMonth() + 1
+        };
 
+        days.push(
           <div
             className={`col cell ${
               !dateFns.isSameMonth(day, monthStart)
@@ -95,24 +99,25 @@ class Calendar extends Component {
                     ? "currDate"
                     : ""
             }`}
-
             key={day}
             onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
             //button
-          > 
+          >
             <Link
               className="number"
               {...this.props}
               to={{
-                pathname: "/calendar/" + (day.getMonth()+1) + "-" + cloneDay.getDate(),
+                pathname:
+                  "/calendar/" +
+                  (day.getMonth() + 1) +
+                  "-" +
+                  cloneDay.getDate(),
                 state: room
-                  
-               }}
-            > 
+              }}
+            >
               {formattedDate}
             </Link>
           </div>
-          
         );
         day = dateFns.addDays(day, 1);
       }
@@ -130,11 +135,8 @@ class Calendar extends Component {
     this.setState({
       selectedDate: day,
       selectedDay: day.getDate(),
-      selectedMonth: day.getMonth()+1
+      selectedMonth: day.getMonth() + 1
     });
-    
-
-
   };
 
   nextMonth = () => {
@@ -152,6 +154,12 @@ class Calendar extends Component {
   render() {
     return (
       <Page className="calPage">
+        <div className="backbtn">
+          <button type="button" onClick={this.back}>
+            <img className="arrow" src={arrowBackBlack} alt="arrow back" />
+            <p>Back</p>
+          </button>
+        </div>
         <div className="calendar">
           {this.renderHeader()}
           {this.renderDays()}

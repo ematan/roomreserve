@@ -1,146 +1,169 @@
-import React, { Component }from 'react';
-import { withFirebase } from '../../firebase'
+import React, { Component } from "react";
+import { withFirebase } from "../../firebase";
 import AuthUserContext from "../Session/AuthUserContext";
-
+import Page from "../Page";
+import arrowBackBlack from "../../img/arrow-back.png";
+import "./Timeslots.scss";
 
 const jsonData = {
-	"slots" : {
-		"slot1": "8.00 to 10:00",
-		"slot2": "10.00 to 12:00",
-		"slot3": "12.00 to 14:00",
-		"slot4": "14.00 to 16:00",
-		"slot5": "16.00 to 18:00",
-		"slot6": "18.00 to 20:00"
-	}
-}
+  slots: {
+    slot1: "8.00 - 10:00",
+    slot2: "10.00 - 12:00",
+    slot3: "12.00 - 14:00",
+    slot4: "14.00 - 16:00",
+    slot5: "16.00 - 18:00",
+    slot6: "18.00 - 20:00"
+  }
+};
 
 const jsonDataDefaults = {
-		"slot1": null,
-		"slot2": null,
-		"slot3": null,
-		"slot4": null,
-		"slot5": null,
-		"slot6": null
-}
+  slot1: null,
+  slot2: null,
+  slot3: null,
+  slot4: null,
+  slot5: null,
+  slot6: null
+};
 
 class TimeSlot extends Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			reservationDate: this.props.location.state.selectedDay,
-			reservationMonth: this.props.location.state.selectedMonth,
-			room:this.props.location.state.room,
-			building: this.props.location.state.building,
-			users: null,
-			slots: null,	
-		}
-	}
-
-	componentDidMount() {
-		const month = this.state.reservationMonth
-		const date = this.state.reservationDate
-		const room = "r-" + this.state.room
-		
-		this.props.firebase.db.ref('rooms').child(room)
-		.child("reservations")
-		.child(month)
-		.child(date)
-		.once("value")
-		.then(snapshot => this.setState({slots:snapshot.val()}))
+  constructor(props) {
+    super(props);
+    this.state = {
+      reservationDate: this.props.location.state.selectedDay,
+      reservationMonth: this.props.location.state.selectedMonth,
+      room: this.props.location.state.room,
+      building: this.props.location.state.building,
+      users: null,
+      slots: null
+    };
+    this.back = this.back.bind(this);
   }
 
-	
+  back(e) {
+    e.stopPropagation();
+    this.props.history.goBack();
+  }
 
-	onPressBack() {
-		const { goBack } = this.props.navigation
-		goBack()
-	}
+  componentDidMount() {
+    const month = this.state.reservationMonth;
+    const date = this.state.reservationDate;
+    const room = "r-" + this.state.room;
 
-	checkStatus(key,user){
-		return !this.state.slots || !this.state.slots[key];		
-	}
+    this.props.firebase.db
+      .ref("rooms")
+      .child(room)
+      .child("reservations")
+      .child(month)
+      .child(date)
+      .once("value")
+      .then(snapshot => this.setState({ slots: snapshot.val() }));
+  }
 
-	checkIfOwned(key, user){
-		return this.state.slots[key] === user.uid;
-	}
+  onPressBack() {
+    const { goBack } = this.props.navigation;
+    goBack();
+  }
 
-	reserveSlot(status, key, value, user) {
-		const month = this.state.reservationMonth
-		const date = this.state.reservationDate
-		const room = "r-" + this.state.room
-		//const user = this.props.authUser
-		const uid = user.uid
-		let userDataJson = {}
-		if(status)
-			userDataJson[key] = uid
-		else
-			userDataJson[key] = null
+  checkStatus(key, user) {
+    return !this.state.slots || !this.state.slots[key];
+  }
 
-		this.props.firebase.db.ref('rooms').child(room)
-		.child("reservations")
-		.child(month)
-		.child(date)
-		.update(userDataJson)
+  checkIfOwned(key, user) {
+    return this.state.slots[key] === user.uid;
+  }
 
-		this.props.firebase.db.ref('rooms').child(room)
-		.child("reservations")
-		.child(month)
-		.child(date)
-		.once("value")
-		.then(snapshot => this.setState({slots:snapshot.val()}));
+  reserveSlot(status, key, value, user) {
+    const month = this.state.reservationMonth;
+    const date = this.state.reservationDate;
+    const room = "r-" + this.state.room;
+    //const user = this.props.authUser
+    const uid = user.uid;
+    let userDataJson = {};
+    if (status) userDataJson[key] = uid;
+    else userDataJson[key] = null;
 
-	}
+    this.props.firebase.db
+      .ref("rooms")
+      .child(room)
+      .child("reservations")
+      .child(month)
+      .child(date)
+      .update(userDataJson);
 
-	renderSlots() {
-		let _this = this
-		const slots = jsonData.slots
-		const arraySlots = Object.keys(slots).map( function(k) {
+    this.props.firebase.db
+      .ref("rooms")
+      .child(room)
+      .child("reservations")
+      .child(month)
+      .child(date)
+      .once("value")
+      .then(snapshot => this.setState({ slots: snapshot.val() }));
+  }
+
+  renderSlots() {
+    let _this = this;
+    const slots = jsonData.slots;
+    const arraySlots = Object.keys(slots).map(function(k) {
       return (
-      	<AuthUserContext.Consumer>
-      	{authUser => (
-      		authUser && _this.checkStatus(k, authUser)) 
-      	  ? (<div 
-      	  		key={k} 
-      	  		style={{margin:5}}
-        			onClick={(status) => {
-        				_this.reserveSlot(status,k,slots[k], authUser) }} 
-        		>	
-        			{k} : {slots[k]}<br/>
-          		"Varaa tästä!"
-          		<hr/>
-        		
-      	
-        		</div>)
-      	 : (<div key={k}> {k} : {slots[k]}<br/>
-      	 					Reserved for: 
-      	 					<b>{_this.state.slots && _this.checkIfOwned(k, authUser)? "You": "Other"}</b>
-      	 					<hr/>
-      	 		</div>)
-      	  
-        }
-    	</AuthUserContext.Consumer>
-      )
+        <AuthUserContext.Consumer>
+          {authUser =>
+            authUser && _this.checkStatus(k, authUser) ? (
+              <div
+                key={k}
+                style={{ margin: 5 }}
+                onClick={status => {
+                  _this.reserveSlot(status, k, slots[k], authUser);
+                }}
+                className="slot free"
+              >
+                {slots[k]}
+                <br />
+                <p>"Varaa tästä!"</p>
+              </div>
+            ) : (
+              <div key={k} className="slot reserved">
+                <p>
+                  <b>{slots[k]}</b>
+                </p>
+                <p>
+                  Reserved for:{" "}
+                  <b>
+                    {_this.state.slots && _this.checkIfOwned(k, authUser)
+                      ? "You"
+                      : "Other"}
+                  </b>
+                </p>
+              </div>
+            )
+          }
+        </AuthUserContext.Consumer>
+      );
     });
-		return arraySlots;
-	}
+    return arraySlots;
+  }
 
-	render() {
-		return (
-    	<div>
-    	 
-    	
-		    	
-		    	<div>
-		    	<h1>MOI</h1>
-		    	<button onClick= {() => this.onPressBack()} 
-		    	  text="return" />
-		    	{ this.renderSlots() }</div>
-
-    		
-    	</div>
+  render() {
+    const { location } = this.props;
+    return (
+      <Page className="tsPage">
+        <div className="backbtn">
+          <button type="button" onClick={this.back}>
+            <img className="arrow" src={arrowBackBlack} alt="arrow back" />
+            <p>Back</p>
+          </button>
+        </div>
+        <div>
+          <br />
+          <br />
+          <h1>
+            Available slots for {location.state.selectedDay}.
+            {location.state.selectedMonth}.
+          </h1>
+          {this.renderSlots()}
+        </div>
+      </Page>
     );
-
-	}
+  }
 }
 
 export default withFirebase(TimeSlot);

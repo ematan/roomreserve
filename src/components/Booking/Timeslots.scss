@@ -1,0 +1,36 @@
+@import "../../variables";
+
+h1 {
+  margin: 20px 0;
+}
+.tsPage {
+  background-size: cover;
+  width: 100vw;
+  min-height: 100vh;
+  background-image: url("../../img/bg.jpg");
+  background-repeat: no-repeat;
+  padding-bottom: 20px;
+}
+
+.slot {
+  background-color: $white-80;
+  margin: 5px auto;
+  width: 50%;
+  text-align: center;
+  border: 1px solid $white;
+}
+
+.reserved {
+  background-color: rgba(200, 200, 200, 0.9);
+  border: 1px solid $grey;
+}
+
+@media only screen and (max-width: 600px) {
+  .slot {
+    width: 80%;
+  }
+
+  h1 {
+    margin: 20px 0;
+  }
+}
