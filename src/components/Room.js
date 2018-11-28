@@ -21,8 +21,8 @@ class Room extends Component {
   }
 
   render() {
-    const roomid = this.props.location.state.id
-    const building = this.props.location.state.building
+    const roomid = this.props.location.state.id;
+    const building = this.props.location.state.building;
     return (
       <Page className="room">
         <div className="back">
@@ -56,22 +56,22 @@ class Room extends Component {
             <p>Availability</p>
           </div>
           <div className="line">
-            <div className="link">
-              <a href="/calenda">Book this room</a>
+            <div className="booking">
               <ListItem
-                  key={building + "/" + roomid}
-                  button
-                  component={props => (
-                    <Link
-                      {...props}
-                      to={{
-                        pathname: "/calendar/" + building + "/" + roomid, 
-                        state: this.props.location.state.name
-                      }}
-                    />
-                  )}
-                >
-                </ListItem>
+                key={building + "/" + roomid}
+                button
+                component={props => (
+                  <Link
+                    {...props}
+                    to={{
+                      pathname: "/calendar/" + building + "/" + roomid,
+                      state: this.props.location.state.name
+                    }}
+                  >
+                    Book this room
+                  </Link>
+                )}
+              />
             </div>
           </div>
         </div>
