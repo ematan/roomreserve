@@ -25,22 +25,37 @@ class TimeSlot extends Component {
 			reservationMonth: this.props.location.state.selectedMonth,
 			room:this.props.location.state.room,
 			building: this.props.location.state.building,
-			users: null
+			users: null,
+			slots: null,
+			
 			
 		}
 	}
 
 	componentDidMount() {
-    this.props.firebase.onceGetUsers().then(snapshot =>
-      this.setState({ users: snapshot.val() })
-    );
-    
-    
+		const month = this.state.reservationMonth
+		const date = this.state.reservationDate
+		const room = "r-" + this.state.room
+		
+		this.props.firebase.db.ref('rooms').child(room)
+		.child("reservations")
+		.child(month)
+		.child(date)
+		.once("value")
+		.then(snapshot => this.setState({slots:snapshot.val()}));
   }
+
+	
 
 	onPressBack() {
 		const { goBack } = this.props.navigation
 		goBack()
+	}
+
+	checkStatus(key,user){
+		return !this.state.slots[key]
+
+		
 	}
 
 	reserveSlot(status, key, value, user) {
@@ -62,13 +77,13 @@ class TimeSlot extends Component {
 		.update(userDataJson)
 	}
 
-	render() {
+	renderSlots() {
 		let _this = this
 		const slots = jsonData.slots
 		const arraySlots = Object.keys(slots).map( function(k) {
       return (
       	<AuthUserContext.Consumer>
-      	{authUser => authUser  
+      	{authUser => authUser && _this.state.slots && _this.checkStatus(k, authUser) 
       	 ? (<div key={k} style={{margin:5}}>
       	{k} : {slots[k]}
         <div
@@ -76,24 +91,29 @@ class TimeSlot extends Component {
         		console.log("Click!");
         		_this.reserveSlot(status,k,slots[k], authUser) }} 
         >	
-          "moi"
+          "Varaa tästä!"
         </div>
       	
         </div>)
-      	 :<div> Errorteksti </div>
+      	 :<div> Errorteksti tai varattu jo </div>
         }
     	</AuthUserContext.Consumer>
       )
     });
+		return arraySlots;
+	}
 
-    return (
+	render() {
+		return (
     	<div>
     	 
     	
-		    	<button //onPress= {() => this.onPressBack()} 
+		    	
+		    	<div>
+		    	<h1>MOI</h1>
+		    	<button onClick= {() => this.onPressBack()} 
 		    	  text="return" />
-		    	<div><h1>MOI</h1>
-		    	{ arraySlots }</div>
+		    	{ this.renderSlots() }</div>
 
     		
     	</div>
