@@ -1,9 +1,6 @@
 import React, { Component }from 'react';
 import { withFirebase } from '../../firebase'
 import AuthUserContext from "../Session/AuthUserContext";
-import dateFns from "date-fns";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemText from "@material-ui/core/ListItemText";
 
 
 const jsonData = {
@@ -17,6 +14,15 @@ const jsonData = {
 	}
 }
 
+const jsonDataDefaults = {
+		"slot1": null,
+		"slot2": null,
+		"slot3": null,
+		"slot4": null,
+		"slot5": null,
+		"slot6": null
+}
+
 class TimeSlot extends Component {
 	constructor(props) {
 		super(props)
@@ -26,9 +32,7 @@ class TimeSlot extends Component {
 			room:this.props.location.state.room,
 			building: this.props.location.state.building,
 			users: null,
-			slots: null,
-			
-			
+			slots: null,	
 		}
 	}
 
@@ -42,7 +46,7 @@ class TimeSlot extends Component {
 		.child(month)
 		.child(date)
 		.once("value")
-		.then(snapshot => this.setState({slots:snapshot.val()}));
+		.then(snapshot => this.setState({slots:snapshot.val()}))
   }
 
 	
@@ -53,9 +57,11 @@ class TimeSlot extends Component {
 	}
 
 	checkStatus(key,user){
-		return !this.state.slots[key]
+		return !this.state.slots || !this.state.slots[key];		
+	}
 
-		
+	checkIfOwned(key, user){
+		return this.state.slots[key] === user.uid;
 	}
 
 	reserveSlot(status, key, value, user) {
@@ -75,27 +81,44 @@ class TimeSlot extends Component {
 		.child(month)
 		.child(date)
 		.update(userDataJson)
+
+		this.props.firebase.db.ref('rooms').child(room)
+		.child("reservations")
+		.child(month)
+		.child(date)
+		.once("value")
+		.then(snapshot => this.setState({slots:snapshot.val()}));
+
 	}
 
 	renderSlots() {
 		let _this = this
 		const slots = jsonData.slots
+		//console.log(_this.state.slots)
 		const arraySlots = Object.keys(slots).map( function(k) {
       return (
       	<AuthUserContext.Consumer>
-      	{authUser => authUser && _this.state.slots && _this.checkStatus(k, authUser) 
-      	 ? (<div key={k} style={{margin:5}}>
-      	{k} : {slots[k]}
-        <div
-        	onClick={(status) => {
-        		console.log("Click!");
-        		_this.reserveSlot(status,k,slots[k], authUser) }} 
-        >	
-          "Varaa tästä!"
-        </div>
+      	{authUser => (
+      		authUser && _this.checkStatus(k, authUser)) 
+      	  ? (<div 
+      	  		key={k} 
+      	  		style={{margin:5}}
+        			onClick={(status) => {
+        				console.log("Click!");
+        				_this.reserveSlot(status,k,slots[k], authUser) }} 
+        		>	
+        			{k} : {slots[k]}<br/>
+          		"Varaa tästä!"
+          		<hr/>
+        		
       	
-        </div>)
-      	 :<div> Errorteksti tai varattu jo </div>
+        		</div>)
+      	 : (<div key={k}> {k} : {slots[k]}<br/>
+      	 					Reserved for: 
+      	 					<b>{_this.state.slots && _this.checkIfOwned(k, authUser)? "You": "Other"}</b>
+      	 					<hr/>
+      	 		</div>)
+      	  
         }
     	</AuthUserContext.Consumer>
       )
