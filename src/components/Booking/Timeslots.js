@@ -94,7 +94,6 @@ class TimeSlot extends Component {
 	renderSlots() {
 		let _this = this
 		const slots = jsonData.slots
-		//console.log(_this.state.slots)
 		const arraySlots = Object.keys(slots).map( function(k) {
       return (
       	<AuthUserContext.Consumer>
@@ -104,7 +103,6 @@ class TimeSlot extends Component {
       	  		key={k} 
       	  		style={{margin:5}}
         			onClick={(status) => {
-        				console.log("Click!");
         				_this.reserveSlot(status,k,slots[k], authUser) }} 
         		>	
         			{k} : {slots[k]}<br/>

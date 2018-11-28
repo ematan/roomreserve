@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import dateFns from "date-fns";
 import Page from "../Page";
 import "./Calendar.scss";
-//import TimeSlot from './Timeslots';
 import { Link } from "react-router-dom";
 
 class Calendar extends Component {
@@ -71,11 +70,6 @@ class Calendar extends Component {
     let day = startDate;
     let formattedDate = "";
 
-
-    //console.log(match.params)
-    //console.log(this.props.selectedDate)
-
-
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
         formattedDate = dateFns.format(day, dateFormat);
@@ -138,7 +132,6 @@ class Calendar extends Component {
       selectedDay: day.getDate(),
       selectedMonth: day.getMonth()+1
     });
-    //console.log(day);
     
 
 
