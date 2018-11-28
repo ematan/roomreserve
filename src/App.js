@@ -7,13 +7,12 @@ import LandingPage from "./components/LandingPage";
 import SignUpPage from "./components/SignUp";
 import SignInPage from "./components/SignIn";
 import PasswordForgetPage from "./components/PasswordForget";
-import AccountPage from "./components/Account";
+import Account from "./components/Account";
 import BuildingList from "./components/BuildingList";
 import RoomList from "./components/RoomList";
 import Room from "./components/Room";
 import Calendar from "./components/Booking/Calendar";
 import TimeSlot from "./components/Booking/Timeslots";
-
 
 import * as routes from "./constants/routes";
 //import { firebase } from "./firebase";
@@ -33,7 +32,7 @@ const App = () => (
         path={routes.PASSWORD_FORGET}
         component={PasswordForgetPage}
       />
-      <Route exact path={routes.ACCOUNT} component={AccountPage} />
+      <Route exact path={routes.ACCOUNT} component={Account} />
       <Route exact path={routes.BUILDINGS} component={BuildingList} />
       <Route exact path={routes.BUILDING_ROOMS} component={RoomList} />
       <Route exact path={routes.ROOM} component={Room} />

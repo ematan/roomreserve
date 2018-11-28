@@ -6,6 +6,7 @@ import availableIcon from "../img/available.png";
 import arrowBack from "../img/arrow-back-white.png";
 import ListItem from "@material-ui/core/ListItem";
 import { Link } from "react-router-dom";
+import AuthUserContext from "./Session/AuthUserContext";
 
 import "./Room.scss";
 
@@ -55,25 +56,41 @@ class Room extends Component {
             />
             <p>Availability</p>
           </div>
-          <div className="line">
-            <div className="booking">
-              <ListItem
-                key={building + "/" + roomid}
-                button
-                component={props => (
-                  <Link
-                    {...props}
-                    to={{
-                      pathname: "/calendar/" + building + "/" + roomid,
-                      state: this.props.location.state.name
-                    }}
-                  >
-                    Book this room
-                  </Link>
-                )}
-              />
-            </div>
-          </div>
+          <AuthUserContext.Consumer>
+            {authUser =>
+              authUser ? (
+                <div className="line">
+                  <div className="booking">
+                    <ListItem
+                      key={building + "/" + roomid}
+                      button
+                      component={props => (
+                        <Link
+                          {...props}
+                          to={{
+                            pathname: "/calendar/" + building + "/" + roomid,
+                            state: this.props.location.state.name
+                          }}
+                        >
+                          Book this room
+                        </Link>
+                      )}
+                    />
+                  </div>
+                </div>
+              ) : (
+                <div className="line">
+                  <div className="booking notLogged">
+                    <ListItem
+                      key={building + "/" + roomid}
+                      button
+                      component={props => <p>Log In to reserve this room</p>}
+                    />
+                  </div>
+                </div>
+              )
+            }
+          </AuthUserContext.Consumer>
         </div>
       </Page>
     );

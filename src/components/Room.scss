@@ -78,6 +78,15 @@
   font-weight: 600;
 }
 
+.notLogged {
+  background-color: grey;
+  font-size: 10px;
+}
+
+.notLogged > p {
+  font-size: 13px !important;
+}
+
 .roomInfo p {
   display: inline-block;
   font-size: 20px;
@@ -97,7 +106,7 @@
   }
 
   .line {
-    margin: 10px;
+    margin: 0px;
   }
 
   h1 {

@@ -116,9 +116,10 @@ class TimeSlot extends Component {
                 }}
                 className="slot free"
               >
-                {slots[k]}
-                <br />
-                <p>"Varaa tästä!"</p>
+                <p>
+                  <b>{slots[k]}</b>
+                </p>
+                <p>Reserve this slot!</p>
               </div>
             ) : (
               <div key={k} className="slot reserved">
@@ -126,11 +127,12 @@ class TimeSlot extends Component {
                   <b>{slots[k]}</b>
                 </p>
                 <p>
-                  Reserved for:{" "}
                   <b>
-                    {_this.state.slots && _this.checkIfOwned(k, authUser)
-                      ? "You"
-                      : "Other"}
+                    {_this.state.slots && _this.checkIfOwned(k, authUser) ? (
+                      <span>Reserved for you</span>
+                    ) : (
+                      "Reserved"
+                    )}
                   </b>
                 </p>
               </div>

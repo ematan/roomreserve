@@ -14,7 +14,7 @@ h1 {
 
 .slot {
   background-color: $white-80;
-  margin: 5px auto;
+  margin: 5px auto !important;
   width: 50%;
   text-align: center;
   border: 1px solid $white;
@@ -23,6 +23,11 @@ h1 {
 .reserved {
   background-color: rgba(200, 200, 200, 0.9);
   border: 1px solid $grey;
+  color: grey;
+}
+
+.reserved span {
+  color: green;
 }
 
 @media only screen and (max-width: 600px) {
