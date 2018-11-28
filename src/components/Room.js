@@ -4,6 +4,8 @@ import locIcon from "../img/location.png";
 import numPeople from "../img/numPeople.png";
 import availableIcon from "../img/available.png";
 import arrowBack from "../img/arrow-back-white.png";
+import ListItem from "@material-ui/core/ListItem";
+import { Link } from "react-router-dom";
 
 import "./Room.scss";
 
@@ -19,6 +21,8 @@ class Room extends Component {
   }
 
   render() {
+    const roomid = this.props.location.state.id
+    const building = this.props.location.state.building
     return (
       <Page className="room">
         <div className="back">
@@ -53,7 +57,21 @@ class Room extends Component {
           </div>
           <div className="line">
             <div className="link">
-              <a href="/calendar">Book this room</a>
+              <a href="/calenda">Book this room</a>
+              <ListItem
+                  key={building + "/" + roomid}
+                  button
+                  component={props => (
+                    <Link
+                      {...props}
+                      to={{
+                        pathname: "/calendar/" + building + "/" + roomid, 
+                        state: this.props.location.state.name
+                      }}
+                    />
+                  )}
+                >
+                </ListItem>
             </div>
           </div>
         </div>

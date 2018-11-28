@@ -12,6 +12,7 @@ import BuildingList from "./components/BuildingList";
 import RoomList from "./components/RoomList";
 import Room from "./components/Room";
 import Calendar from "./components/Booking/Calendar";
+import TimeSlot from "./components/Booking/Timeslots";
 
 
 import * as routes from "./constants/routes";
@@ -37,6 +38,7 @@ const App = () => (
       <Route exact path={routes.BUILDING_ROOMS} component={RoomList} />
       <Route exact path={routes.ROOM} component={Room} />
       <Route exact path={routes.CALENDAR} component={Calendar} />
+      <Route exact path={routes.SLOTS} component={TimeSlot} />
     </div>
   </Router>
 );

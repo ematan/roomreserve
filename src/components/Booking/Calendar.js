@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import dateFns from "date-fns";
 import Page from "../Page";
 import "./Calendar.scss";
+import { Link } from "react-router-dom";
 
 class Calendar extends Component {
   constructor(props) {
@@ -9,7 +10,9 @@ class Calendar extends Component {
     this.state = {
       currentMonth: new Date(),
       selectedDate: new Date(),
-      currentDate: new Date()
+      currentDate: new Date(),
+      selectedDay: new Date(),
+      selectedMonth: new Date()
     };
   }
 
@@ -54,6 +57,7 @@ class Calendar extends Component {
 
   renderCells() {
     const { currentMonth, selectedDate, currentDate } = this.state;
+    const { match } = this.props;
     const monthStart = dateFns.startOfMonth(currentMonth);
     const monthEnd = dateFns.endOfMonth(monthStart);
     const startDate = dateFns.startOfWeek(monthStart, { weekStartsOn: 1 });
@@ -70,7 +74,17 @@ class Calendar extends Component {
       for (let i = 0; i < 7; i++) {
         formattedDate = dateFns.format(day, dateFormat);
         const cloneDay = day;
+        const room = {
+          room: match.params.roomid,
+          building: match.params.buildingid,
+          selectedDay: day.getDate(),
+          selectedMonth: day.getMonth()+1
+        }
+        
         days.push(
+          
+            
+
           <div
             className={`col cell ${
               !dateFns.isSameMonth(day, monthStart)
@@ -81,11 +95,24 @@ class Calendar extends Component {
                     ? "currDate"
                     : ""
             }`}
+
             key={day}
             onClick={() => this.onDateClick(dateFns.parse(cloneDay))}
-          >
-            <span className="number">{formattedDate}</span>
+            //button
+          > 
+            <Link
+              className="number"
+              {...this.props}
+              to={{
+                pathname: "/calendar/" + (day.getMonth()+1) + "-" + cloneDay.getDate(),
+                state: room
+                  
+               }}
+            > 
+              {formattedDate}
+            </Link>
           </div>
+          
         );
         day = dateFns.addDays(day, 1);
       }
@@ -101,8 +128,13 @@ class Calendar extends Component {
 
   onDateClick = day => {
     this.setState({
-      selectedDate: day
+      selectedDate: day,
+      selectedDay: day.getDate(),
+      selectedMonth: day.getMonth()+1
     });
+    
+
+
   };
 
   nextMonth = () => {

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { withRouter } from "react-router-dom";
+import React from "react";
+//import { withRouter } from "react-router-dom";
 //import { auth } from "../firebase";
 import { withFirebase } from "../firebase";
-import * as routes from "../constants/routes";
+//import * as routes from "../constants/routes";
 import logout from "../img/logout.png";
 import "./SignOut.scss";
 
@@ -18,9 +18,9 @@ export default withFirebase(SignOutButton);
   //<button type="button" onClick={auth.doSignOut().then(()=> history.push(routes.LANDING))}>
   //  <img className="logo-icon" src={logout} alt="logo" />
   //</button>
-  <SignOutButton history={history} />
-);
-
+ // <SignOutButton history={history} />
+//);
+/*
 class SignOutButton extends Component {
   onClick = event => {
     const { history } = this.props;
@@ -39,6 +39,6 @@ class SignOutButton extends Component {
   }
 }
 
-export default withRouter(SignOut);
+//export default withRouter(SignOut);
 
 export { SignOutButton };*/
