@@ -110,7 +110,6 @@ class TimeSlot extends Component {
   }
 
   handleClick(slot) {
-    console.log(slot)
     const room = "r-" + this.state.room;
     const date = this.state.reservationDate;
     const month = this.state.reservationMonth;
@@ -142,7 +141,7 @@ class TimeSlot extends Component {
                 <p>Reserve this slot!</p>
               </div>
             ) : (
-              <div key={k} className="slot reserved">
+              <div key={k} className="slot reserved" >
                 <p>
                   <b>{slots[k]}</b>
                 </p>
