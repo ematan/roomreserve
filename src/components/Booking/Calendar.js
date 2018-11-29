@@ -13,7 +13,8 @@ class Calendar extends Component {
       selectedDate: new Date(),
       currentDate: new Date(),
       selectedDay: new Date(),
-      selectedMonth: new Date()
+      selectedMonth: new Date(),
+      slots:null
     };
     this.back = this.back.bind(this);
   }
@@ -21,6 +22,13 @@ class Calendar extends Component {
   back(e) {
     e.stopPropagation();
     this.props.history.goBack();
+  }
+
+  countFreeSlots(roomId, month, day) {
+    this.firebase.onceGetSlots(roomId, month, day)
+    .then(snapshot => this.setState({ slots: snapshot.val() }));
+
+    return this.state.slots.map(k => !k?0:1).sum
   }
 
   renderHeader() {
@@ -76,10 +84,12 @@ class Calendar extends Component {
     let days = [];
     let day = startDate;
     let formattedDate = "";
+    let freeSlots = 0;
 
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
         formattedDate = dateFns.format(day, dateFormat);
+        freeSlots = 1;
         const cloneDay = day;
         const room = {
           room: match.params.roomid,
