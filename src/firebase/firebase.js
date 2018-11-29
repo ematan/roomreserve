@@ -96,7 +96,7 @@ class Firebase {
       .child("rooms")
       .once("value");
 
-  oceGetSlots = (roomId, month, day) =>
+  onceGetSlots = (roomId, month, day) =>
     this.db.ref("rooms")
     .child(roomId)
     .child("reservations")
