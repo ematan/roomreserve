@@ -34,9 +34,18 @@ class TimeSlot extends Component {
       room: this.props.location.state.room,
       building: this.props.location.state.building,
       users: null,
-      slots: null
+      slots: null,
+      buttonToggle: {
+        slot1: true,
+        slot2: true,
+        slot3: true,
+        slot4: true,
+        slot5: true,
+        slot6: true
+      }
     };
     this.back = this.back.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   back(e) {
@@ -100,6 +109,17 @@ class TimeSlot extends Component {
       .then(snapshot => this.setState({ slots: snapshot.val() }));
   }
 
+  handleClick(slot) {
+    console.log(slot)
+    const room = "r-" + this.state.room;
+    const date = this.state.reservationDate;
+    const month = this.state.reservationMonth;
+    this.props.firebase.cancelReservation(room, month, date, slot)
+    let buttonToggle = Object.assign({}, this.state.buttonToggle); 
+    buttonToggle[slot] = !buttonToggle[slot];
+    this.setState({buttonToggle});
+  }
+
   renderSlots() {
     let _this = this;
     const slots = jsonData.slots;
@@ -128,8 +148,9 @@ class TimeSlot extends Component {
                 </p>
                 <p>
                   <b>
-                    {_this.state.slots && _this.checkIfOwned(k, authUser) ? (
-                      <span>Reserved for you</span>
+                    {_this.state.slots && _this.checkIfOwned(k, authUser) && _this.state.buttonToggle[k]? (
+                      <span>Reserved for you <button type="button" onClick={() => _this.handleClick(k)}>Cancel</button></span>
+
                     ) : (
                       "Reserved"
                     )}

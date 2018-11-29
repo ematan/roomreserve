@@ -95,6 +95,24 @@ class Firebase {
       .ref()
       .child("rooms")
       .once("value");
+
+  onceGetSlots = (roomId, month, day) =>
+    this.db.ref("rooms")
+    .child(roomId)
+    .child("reservations")
+    .child(month)
+    .child(day)
+    .once("value");
+
+
+  cancelReservation = (roomId, month, day, slot) =>
+    this.db.ref("rooms")
+    .child(roomId)
+    .child("reservations")
+    .child(month)
+    .child(day)
+    .child(slot)
+    .remove()
 }
 
 export default Firebase;

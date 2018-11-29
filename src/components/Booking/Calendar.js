@@ -4,6 +4,7 @@ import Page from "../Page";
 import "./Calendar.scss";
 import { Link } from "react-router-dom";
 import arrowBackBlack from "../../img/arrow-back.png";
+import { withFirebase } from "../../firebase";
 
 class Calendar extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ class Calendar extends Component {
       selectedDate: new Date(),
       currentDate: new Date(),
       selectedDay: new Date(),
-      selectedMonth: new Date()
+      selectedMonth: new Date(),
+      status: null
     };
     this.back = this.back.bind(this);
   }
@@ -22,6 +24,15 @@ class Calendar extends Component {
     e.stopPropagation();
     this.props.history.goBack();
   }
+
+/*  countFreeSlots(roomId, month, day) {
+    return (this.props.firebase.onceGetSlots(roomId, month, day)
+    .then(snapshot =>  (snapshot.val()
+                        ? snapshot.val().map(k => !k?0:1).sum() 
+                        : 0)));
+
+    
+  }*/
 
   renderHeader() {
     const dateFormat = "MMMM YYYY";
@@ -76,6 +87,7 @@ class Calendar extends Component {
     let days = [];
     let day = startDate;
     let formattedDate = "";
+    let freeSlots = 0;
 
     while (day <= endDate) {
       for (let i = 0; i < 7; i++) {
@@ -87,7 +99,7 @@ class Calendar extends Component {
           selectedDay: day.getDate(),
           selectedMonth: day.getMonth() + 1
         };
-
+        //freeSlots = this.countFreeSlots(("r-"+room.roomid), room.selectedMonth,formattedDate )
         days.push(
           <div
             className={`col cell ${
@@ -170,4 +182,4 @@ class Calendar extends Component {
   }
 }
 
-export default Calendar;
+export default withFirebase(Calendar);
