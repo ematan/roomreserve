@@ -110,14 +110,14 @@ class TimeSlot extends Component {
   }
 
   handleClick(slot) {
-    console.log(slot)
+    console.log(slot);
     const room = "r-" + this.state.room;
     const date = this.state.reservationDate;
     const month = this.state.reservationMonth;
-    this.props.firebase.cancelReservation(room, month, date, slot)
-    let buttonToggle = Object.assign({}, this.state.buttonToggle); 
+    this.props.firebase.cancelReservation(room, month, date, slot);
+    let buttonToggle = Object.assign({}, this.state.buttonToggle);
     buttonToggle[slot] = !buttonToggle[slot];
-    this.setState({buttonToggle});
+    this.setState({ buttonToggle });
   }
 
   renderSlots() {
@@ -148,9 +148,18 @@ class TimeSlot extends Component {
                 </p>
                 <p>
                   <b>
-                    {_this.state.slots && _this.checkIfOwned(k, authUser) && _this.state.buttonToggle[k]? (
-                      <span>Reserved for you <button type="button" onClick={() => _this.handleClick(k)}>Cancel</button></span>
-
+                    {_this.state.slots &&
+                    _this.checkIfOwned(k, authUser) &&
+                    _this.state.buttonToggle[k] ? (
+                      <span>
+                        Reserved for you{" "}
+                        <button
+                          type="button"
+                          onClick={() => _this.handleClick(k)}
+                        >
+                          Cancel
+                        </button>
+                      </span>
                     ) : (
                       "Reserved"
                     )}
@@ -184,6 +193,12 @@ class TimeSlot extends Component {
           </h1>
           {this.renderSlots()}
         </div>
+        <button
+          className="doneBtn"
+          onClick={() => this.props.history.push("/buildings")}
+        >
+          Done
+        </button>
       </Page>
     );
   }
