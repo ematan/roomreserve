@@ -45,7 +45,6 @@ class Cancellation extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { room, month, day, slot } = this.state;
     const _this = this;
     const jsonData = {
