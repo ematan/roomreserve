@@ -12,6 +12,8 @@ const SignOutButton = ({ firebase }) => (
   </button>
 );
 
+const condition = authUser => !!authUser;
+
 export default withFirebase(SignOutButton);
 
 /*const SignOut = ({history}) => (

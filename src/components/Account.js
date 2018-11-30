@@ -6,6 +6,7 @@ import AuthUserContext from "./Session/AuthUserContext";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 import { Link } from "react-router-dom";
+import withAuthorization from './Session/withAuthorization';
 
 import "./Account.scss";
 
@@ -134,4 +135,6 @@ class Account extends Component {
   }
 }
 
-export default withFirebase(Account);
+const condition = authUser => !!authUser;
+
+export default withAuthorization(condition)(Account);
